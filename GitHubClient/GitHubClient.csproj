@@ -94,8 +94,12 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\UserNameProvider.cs" />
+    <Compile Include="Helpers\CommitFileStatusValueConverter.cs" />
     <Compile Include="Helpers\ContentTypeImageValueConverter.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Pages\CommitDetailsPage.xaml.cs">
+      <DependentUpon>CommitDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CommitsPage.xaml.cs">
       <DependentUpon>CommitsPage.xaml</DependentUpon>
     </Compile>
@@ -117,6 +121,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\CommitDetailsViewModel.cs" />
     <Compile Include="ViewModels\ContentFileViewModel.cs" />
     <Compile Include="ViewModels\RepositoryDetailsViewModel.cs" />
     <Compile Include="ViewModels\RepositoryListViewModel.cs" />
@@ -138,6 +143,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Pages\CommitDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\CommitsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

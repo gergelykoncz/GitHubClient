@@ -11,6 +11,7 @@ namespace GitHubClient.WebApi.Mappers
             result.Author = model.Commit.Author;
             result.Committer = model.Commit.Committer;
             result.Message = model.Commit.Message;
+            result.SHA = model.SHA;
             return result;
         }
     }

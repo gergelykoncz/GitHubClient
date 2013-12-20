@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-
+﻿
 namespace GitHubClient.WebApi.Entities
 {
     public class Commit
@@ -7,5 +6,6 @@ namespace GitHubClient.WebApi.Entities
         public Author Author { get; set; }
         public Author Committer { get; set; }
         public string Message { get; set; }
+        public string SHA { get; set; }
     }
 }

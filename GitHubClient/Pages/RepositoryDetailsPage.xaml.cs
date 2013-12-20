@@ -72,5 +72,19 @@ namespace GitHubClient.Pages
                 }
             }
         }
+
+        private void Commits_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var longListSelector = sender as LongListSelector;
+            if (longListSelector != null)
+            {
+                if (longListSelector.SelectedItem != null)
+                {
+                    var commit = longListSelector.SelectedItem as Commit;
+                    var commitUri = new Uri(string.Format("/Pages/CommitDetailsPage.xaml?repositoryName={0}&commitSha={1}", _repositoryName, commit.SHA), UriKind.Relative);
+                    NavigationService.Navigate(commitUri);
+                }
+            }
+        }
     }
 }
