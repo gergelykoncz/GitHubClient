@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using GitHubClient.ViewModels;
+﻿using GitHubClient.ViewModels;
 using GitHubClient.WebApi.Entities;
+using Microsoft.Phone.Controls;
+using System;
+using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace GitHubClient.Pages
 {
@@ -49,7 +44,7 @@ namespace GitHubClient.Pages
             }
         }
 
-        private void Files_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Files_Tap(object sender, GestureEventArgs e)
         {
             var longListSelector = sender as LongListSelector;
             if (longListSelector != null)
@@ -73,7 +68,7 @@ namespace GitHubClient.Pages
             }
         }
 
-        private void Commits_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Commits_Tap(object sender, GestureEventArgs e)
         {
             var longListSelector = sender as LongListSelector;
             if (longListSelector != null)

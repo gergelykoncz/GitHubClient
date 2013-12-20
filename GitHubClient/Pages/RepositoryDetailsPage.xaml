@@ -27,12 +27,12 @@
         <phone:Pivot Title="{Binding Name}">
             <!--Pivot item one-->
             <phone:PivotItem Header="files">
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Files}" SelectionChanged="Files_SelectionChanged">
+                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Files}" Tap="Files_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17" Orientation="Horizontal">
                                 <Image Source="{Binding ContentType, Converter={StaticResource ContentTypeImageValueConverter}}" Width="50" Height="50"/>
-                                <TextBlock Text="{Binding Name}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding Name}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextLargeStyle}"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
@@ -40,11 +40,11 @@
             </phone:PivotItem>
 
             <phone:PivotItem Header="commits">
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Commits}" SelectionChanged="Commits_SelectionChanged">
+                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Commits}" Tap="Commits_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding Message}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding Message}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
@@ -56,7 +56,7 @@
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>

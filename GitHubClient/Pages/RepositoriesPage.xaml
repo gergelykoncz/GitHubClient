@@ -21,11 +21,11 @@
     <Grid x:Name="LayoutRoot">
         <phone:Pivot Title="{Binding UserName}">
             <phone:PivotItem Header="{Binding Path=LocalizedResources.ReposAllRepositories, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding AllRepositories}" SelectionChanged="LongListSelector_SelectionChanged">
+                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding AllRepositories}" Tap="LongListSelector_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
@@ -33,11 +33,11 @@
             </phone:PivotItem>
 
             <phone:PivotItem Header="{Binding Path=LocalizedResources.ReposPublic, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding PublicRepositories}" SelectionChanged="LongListSelector_SelectionChanged">
+                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding PublicRepositories}" Tap="LongListSelector_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
@@ -45,11 +45,11 @@
             </phone:PivotItem>
 
             <phone:PivotItem Header="{Binding Path=LocalizedResources.ReposPrivate, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding PrivateRepositories}" SelectionChanged="LongListSelector_SelectionChanged">
+                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding PrivateRepositories}" Tap="LongListSelector_Tap">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="0,0,0,17">
-                                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </phone:LongListSelector.ItemTemplate>
@@ -57,11 +57,11 @@
                 </phone:PivotItem>
 
             <phone:PivotItem Header="{Binding Path=LocalizedResources.ReposForks, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding ForkedRepositories}" SelectionChanged="LongListSelector_SelectionChanged">
+                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding ForkedRepositories}" Tap="LongListSelector_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
