@@ -1,4 +1,5 @@
 ﻿using GitHubClient.Data;
+using GitHubClient.Resources;
 using GitHubClient.WebApi;
 using GitHubClient.WebApi.Entities;
 using System.Collections.ObjectModel;
@@ -93,24 +94,6 @@ namespace GitHubClient.ViewModels
             }
         }
 
-        private bool _isBusy;
-        public bool IsBusy
-        {
-            get
-            {
-                return _isBusy;
-            }
-            set
-            {
-                if (_isBusy != value)
-                {
-                    NotifyPropertyChanging("IsBusy");
-                    _isBusy = value;
-                    NotifyPropertyChanged("IsBusy");
-                }
-            }
-        }
-
         public RepositoryListViewModel()
         {
             Refresh();
@@ -136,7 +119,7 @@ namespace GitHubClient.ViewModels
             }
             catch
             {
-                MessageBox.Show("Unable to fetch repositories. Please make sure you're connected to the Internet.", "Error", MessageBoxButton.OK);
+                MessageBox.Show(AppResources.ErrorMessageRepoFail, AppResources.ErrorMessageCaption, MessageBoxButton.OK);
             }
             finally
             {

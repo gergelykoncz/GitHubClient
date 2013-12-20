@@ -25,7 +25,7 @@
         </Grid.Resources>
         
         <phone:Pivot Title="{Binding SHA}">
-            <phone:PivotItem Header="details">
+            <phone:PivotItem Header="{Binding Path=LocalizedResources.CommitPageDetails, Source={StaticResource LocalizedStrings}}">
                 <Grid DataContext="{Binding Commit}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -44,11 +44,11 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Author" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Path=LocalizedResources.CommitPageAuthor, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
                         <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Name}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextNormalStyle}"/>
-                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Email" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Path=LocalizedResources.CommitPageEmail, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
                         <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Email}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextNormalStyle}"/>
-                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Date" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding Path=LocalizedResources.CommitPageDate, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
                         <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Date}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextNormalStyle}"/>
                     </Grid>
                     
@@ -57,14 +57,14 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="SHA" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Path=LocalizedResources.CommitPageSHA, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding SHA}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextNormalStyle}"/>
                         
                     </Grid>
                 </Grid>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="files">
+            <phone:PivotItem Header="{Binding Path=LocalizedResources.CommitPageFiles, Source={StaticResource LocalizedStrings}}">
                 <phone:LongListSelector ItemsSource="{Binding Files}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>

@@ -1,6 +1,8 @@
-﻿using GitHubClient.ViewModels;
+﻿using GitHubClient.Resources;
+using GitHubClient.ViewModels;
 using GitHubClient.WebApi.Entities;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using System;
 using System.Windows.Controls;
 
@@ -15,6 +17,7 @@ namespace GitHubClient.Pages
             InitializeComponent();
             _viewModel = new RepositoryListViewModel();
             DataContext = _viewModel;
+            buildLocalizedAppbar();
         }
 
         private void LongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -37,6 +40,14 @@ namespace GitHubClient.Pages
         protected void Refresh_Click(object sender, EventArgs e)
         {
             _viewModel.Refresh();
+        }
+
+        private void buildLocalizedAppbar()
+        {
+            ApplicationBarIconButton refreshButton = new ApplicationBarIconButton(new Uri("/Assets/Refresh.png", UriKind.Relative));
+            refreshButton.Text = AppResources.AppBarRefresh;
+            refreshButton.Click += Refresh_Click;
+            ApplicationBar.Buttons.Add(refreshButton);
         }
     }
 }

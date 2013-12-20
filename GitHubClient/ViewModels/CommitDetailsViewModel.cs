@@ -1,4 +1,5 @@
-﻿using GitHubClient.WebApi;
+﻿using GitHubClient.Resources;
+using GitHubClient.WebApi;
 using GitHubClient.WebApi.Entities;
 using GitHubClient.WebApi.Models.Reponse;
 using System.Collections.ObjectModel;
@@ -80,7 +81,7 @@ namespace GitHubClient.ViewModels
             }
             catch
             {
-                MessageBox.Show("Error");
+                MessageBox.Show(AppResources.ErrorMessageCaption);
             }
             finally
             {
