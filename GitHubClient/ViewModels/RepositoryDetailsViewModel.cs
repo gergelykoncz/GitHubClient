@@ -4,12 +4,12 @@ using GitHubClient.WebApi.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 
 namespace GitHubClient.ViewModels
 {
     public class RepositoryDetailsViewModel : ViewModelBase
     {
-        private readonly Stack<string> _folderHistory;
         private string _currentDir = string.Empty;
 
         private string _name;
@@ -122,15 +122,27 @@ namespace GitHubClient.ViewModels
 
         private async void fetchData()
         {
-            var client = new GitHubApiClient();
-            var loadedCommits = await client.GetCommitsForRepository(UserNameProvider.GetUserName(), Name);
-            Commits = new ObservableCollection<Commit>(loadedCommits);
+            try
+            {
+                IsBusy = true;
+                var client = new GitHubApiClient();
+                var loadedCommits = await client.GetCommitsForRepository(UserNameProvider.GetUserName(), Name);
+                Commits = new ObservableCollection<Commit>(loadedCommits);
 
-            var loadedFiles = await client.GetContent(UserNameProvider.GetUserName(), Name, string.Empty);
-            Files = new ObservableCollection<Content>(loadedFiles.OrderBy(x => x.ContentType).ThenBy(x => x.Name));
+                var loadedFiles = await client.GetContent(UserNameProvider.GetUserName(), Name, string.Empty);
+                Files = new ObservableCollection<Content>(loadedFiles.OrderBy(x => x.ContentType).ThenBy(x => x.Name));
 
-            var loadedBranches = await client.GetBranchesForRepository(UserNameProvider.GetUserName(), Name);
-            Branches = new ObservableCollection<Branch>(loadedBranches);
+                var loadedBranches = await client.GetBranchesForRepository(UserNameProvider.GetUserName(), Name);
+                Branches = new ObservableCollection<Branch>(loadedBranches);
+            }
+            catch
+            {
+                MessageBox.Show("Error");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }

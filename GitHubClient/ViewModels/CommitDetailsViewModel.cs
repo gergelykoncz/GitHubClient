@@ -26,22 +26,65 @@ namespace GitHubClient.ViewModels
             }
         }
 
+        private Commit _commit;
+        public Commit Commit
+        {
+            get
+            {
+                return _commit;
+            }
+            set
+            {
+                if (_commit != value)
+                {
+                    NotifyPropertyChanging("Commit");
+                    _commit = value;
+                    NotifyPropertyChanged("Commit");
+                }
+            }
+        }
+
+        private string _sha;
+        public string SHA
+        {
+            get
+            {
+                return _sha;
+            }
+            set
+            {
+                if (_sha != value)
+                {
+                    NotifyPropertyChanging("SHA");
+                    _sha = value;
+                    NotifyPropertyChanged("SHA");
+                }
+            }
+        }
+
         public CommitDetailsViewModel(string userName, string repository, string sha)
         {
+            SHA = sha;
             fetchCommit(userName, repository, sha);
         }
 
         private async void fetchCommit(string userName, string repository, string sha)
         {
-            var client = new GitHubApiClient();
             try
             {
+                IsBusy = true;
+                var client = new GitHubApiClient();
                 CommitsResponseModel commit = await client.GetFilesForCommit(userName, repository, sha);
                 Files = new ObservableCollection<CommitFile>(commit.Files);
+                Commit = commit.Commit;
             }
             catch
             {
                 MessageBox.Show("Error");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
     }

@@ -36,7 +36,9 @@ namespace GitHubClient.WebApi
         {
             Uri endpoint = new Uri(string.Format("{0}repos/{1}/{2}/commits/{3}", GitHubApiUrl, userName, repository, commitSha));
             var jsonClient = new JsonWebClient();
-            return await jsonClient.Get<CommitsResponseModel>(endpoint);
+            var commitResult = await jsonClient.Get<CommitsResponseModel>(endpoint);
+            commitResult.Commit = CommitMapper.MapToEntity(commitResult);
+            return commitResult;
         }
 
         public async Task<IEnumerable<Content>> GetContent(string userName, string repository, string path)

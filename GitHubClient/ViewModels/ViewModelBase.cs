@@ -22,5 +22,25 @@ namespace GitHubClient.ViewModels
 
         public event PropertyChangingEventHandler PropertyChanging;
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private bool _isBusy;
+
+        public bool IsBusy
+        {
+            get
+            {
+                return _isBusy;
+            }
+            set
+            {
+                if (_isBusy != value)
+                {
+                    NotifyPropertyChanging("IsBusy");
+                    _isBusy = value;
+                    NotifyPropertyChanged("IsBusy");
+                }
+            }
+        }
+
     }
 }

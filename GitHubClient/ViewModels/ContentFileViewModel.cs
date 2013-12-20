@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace GitHubClient.ViewModels
@@ -57,14 +58,26 @@ namespace GitHubClient.ViewModels
 
         private async void fetchFile(string repositoryName, string path)
         {
-            var client = new GitHubApiClient();
-            var file = await client.GetFileContent(UserNameProvider.GetUserName(), repositoryName, path);
-            if (file != null)
+            try
             {
-                string base64EncodedFile = file.FileContent;
-                byte[] encodedBytes = Convert.FromBase64String(base64EncodedFile);
-                string textFile = Encoding.UTF8.GetString(encodedBytes, 0, encodedBytes.Length);
-                breakFileIntoBatches(textFile);
+                IsBusy = true;
+                var client = new GitHubApiClient();
+                var file = await client.GetFileContent(UserNameProvider.GetUserName(), repositoryName, path);
+                if (file != null)
+                {
+                    string base64EncodedFile = file.FileContent;
+                    byte[] encodedBytes = Convert.FromBase64String(base64EncodedFile);
+                    string textFile = Encoding.UTF8.GetString(encodedBytes, 0, encodedBytes.Length);
+                    breakFileIntoBatches(textFile);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Error");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 

@@ -15,19 +15,21 @@ namespace GitHubClient.Helpers
                 switch (statusValue.ToLowerInvariant())
                 {
                     case "modified":
+                    case "renamed":
                         iconName = "edit";
                         break;
                     case "added":
                         iconName = "add";
                         break;
                     case "deleted":
+                    case "removed":
                         iconName = "delete";
                         break;
                     default:
                         return null;
                 }
                 var iconUri = new Uri(string.Format("/Assets/{0}.png", iconName), UriKind.Relative);
-                
+
                 return new BitmapImage(iconUri);
             }
             return null;

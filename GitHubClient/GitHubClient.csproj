@@ -100,14 +100,8 @@
     <Compile Include="Pages\CommitDetailsPage.xaml.cs">
       <DependentUpon>CommitDetailsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CommitsPage.xaml.cs">
-      <DependentUpon>CommitsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\ContentFilePage.xaml.cs">
       <DependentUpon>ContentFilePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\FilesPage.xaml.cs">
-      <DependentUpon>FilesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RepositoriesPage.xaml.cs">
       <DependentUpon>RepositoriesPage.xaml</DependentUpon>
@@ -147,15 +141,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\CommitsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\ContentFilePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\FilesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -118,7 +118,6 @@ namespace GitHubClient.ViewModels
 
         public void Refresh()
         {
-            IsBusy = true;
             UserName = UserNameProvider.GetUserName();
             fetchRepositories();
         }
@@ -127,6 +126,7 @@ namespace GitHubClient.ViewModels
         {
             try
             {
+                IsBusy = true;
                 var gitHubClient = new GitHubApiClient();
                 var repositoriesForUser = await gitHubClient.GetRepositoriesForUser(UserNameProvider.GetUserName());
                 AllRepositories = new ObservableCollection<Repository>(repositoriesForUser);

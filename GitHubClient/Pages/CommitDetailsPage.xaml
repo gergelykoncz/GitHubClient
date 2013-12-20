@@ -14,26 +14,63 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator IsIndeterminate="{Binding IsBusy}" 
+                                 IsVisible="{Binding IsBusy}" />
+    </shell:SystemTray.ProgressIndicator>
+    
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.Resources>
             <helpers:CommitFileStatusValueConverter x:Key="CommitFileStatusValueConverter"/>
         </Grid.Resources>
-        <!--Pivot Control-->
-        <phone:Pivot Title="commit">
-            <!--Pivot item one-->
+        
+        <phone:Pivot Title="{Binding SHA}">
             <phone:PivotItem Header="details">
-                <Grid/>
+                <Grid DataContext="{Binding Commit}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" DataContext="{Binding Author}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Author" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Name}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Email" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Email}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Date" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Date}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    </Grid>
+                    
+                    <Grid Grid.Column="0" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="SHA" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding SHA}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        
+                    </Grid>
+                </Grid>
             </phone:PivotItem>
 
-            <!--Pivot item two-->
             <phone:PivotItem Header="files">
                 <phone:LongListSelector ItemsSource="{Binding Files}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="{Binding Status, Converter={StaticResource CommitFileStatusValueConverter}}" Width="30" Height="30"/>
-                                <TextBlock Text="{Binding FileName}"/>
+                                <Image Source="{Binding Status, Converter={StaticResource CommitFileStatusValueConverter}}" Width="50" Height="50"/>
+                                <TextBlock Text="{Binding FileName}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
@@ -41,5 +78,5 @@
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>
-    
+
 </phone:PhoneApplicationPage>
