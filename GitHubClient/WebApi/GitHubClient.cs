@@ -4,6 +4,8 @@ using GitHubClient.WebApi.Models.Reponse;
 using GitHubClient.WebApi.Web;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GitHubClient.WebApi
@@ -61,6 +63,23 @@ namespace GitHubClient.WebApi
             Uri endpoint = new Uri(string.Format("{0}repos/{1}/{2}/branches", GitHubApiUrl, userName, repository));
             var jsonClient = new JsonWebClient();
             return await jsonClient.Get<IEnumerable<Branch>>(endpoint);
+        }
+
+        public async Task<bool> Authenticate(string userName, string password)
+        {
+            Uri endpoint = new Uri(string.Format("{0}user", GitHubApiUrl));
+            var webClient = new WebClient();
+            string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userName + ":" + password));
+            webClient.Headers[HttpRequestHeader.Authorization] = "Basic " + credentials;
+            try
+            {
+                var result = await webClient.DownloadStringTaskAsync(endpoint);
+                return result != null;
+            }
+            catch (WebException)
+            {
+                return false;
+            }
         }
     }
 }

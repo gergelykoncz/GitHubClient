@@ -103,6 +103,9 @@
     <Compile Include="Pages\ContentFilePage.xaml.cs">
       <DependentUpon>ContentFilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RepositoriesPage.xaml.cs">
       <DependentUpon>RepositoriesPage.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,7 @@
     </Compile>
     <Compile Include="ViewModels\CommitDetailsViewModel.cs" />
     <Compile Include="ViewModels\ContentFileViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RepositoryDetailsViewModel.cs" />
     <Compile Include="ViewModels\RepositoryListViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -142,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ContentFilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -142,6 +142,96 @@ namespace GitHubClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter your GitHub username and password to gain access to your repositories..
+        /// </summary>
+        public static string LoginPageHint {
+            get {
+                return ResourceManager.GetString("LoginPageHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided credentials are invalid..
+        /// </summary>
+        public static string LoginPageInvalidCredentials {
+            get {
+                return ResourceManager.GetString("LoginPageInvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to log in.
+        /// </summary>
+        public static string LoginPageLogin {
+            get {
+                return ResourceManager.GetString("LoginPageLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide a password..
+        /// </summary>
+        public static string LoginPageNoPassword {
+            get {
+                return ResourceManager.GetString("LoginPageNoPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide a user name..
+        /// </summary>
+        public static string LoginPageNoUserName {
+            get {
+                return ResourceManager.GetString("LoginPageNoUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string LoginPagePassword {
+            get {
+                return ResourceManager.GetString("LoginPagePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name.
+        /// </summary>
+        public static string LoginPageUserName {
+            get {
+                return ResourceManager.GetString("LoginPageUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to branches.
+        /// </summary>
+        public static string RepoDetailsBranches {
+            get {
+                return ResourceManager.GetString("RepoDetailsBranches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to commits.
+        /// </summary>
+        public static string RepoDetailsCommits {
+            get {
+                return ResourceManager.GetString("RepoDetailsCommits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to files.
+        /// </summary>
+        public static string RepoDetailsFiles {
+            get {
+                return ResourceManager.GetString("RepoDetailsFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to all repositories.
         /// </summary>
         public static string ReposAllRepositories {

@@ -23,10 +23,9 @@
         <Grid.Resources>
             <helpers:ContentTypeImageValueConverter x:Key="ContentTypeImageValueConverter"/>
         </Grid.Resources>
-        <!--Pivot Control-->
+        
         <phone:Pivot Title="{Binding Name}">
-            <!--Pivot item one-->
-            <phone:PivotItem Header="files">
+            <phone:PivotItem Header="{Binding Path=LocalizedResources.RepoDetailsFiles, Source={StaticResource LocalizedStrings}}">
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Files}" Tap="Files_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
@@ -39,7 +38,7 @@
                 </phone:LongListSelector>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="commits">
+            <phone:PivotItem Header="{Binding Path=LocalizedResources.RepoDetailsCommits, Source={StaticResource LocalizedStrings}}">
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Commits}" Tap="Commits_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
@@ -51,7 +50,7 @@
                 </phone:LongListSelector>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="branches">
+            <phone:PivotItem Header="{Binding Path=LocalizedResources.RepoDetailsBranches, Source={StaticResource LocalizedStrings}}">
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Branches}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>

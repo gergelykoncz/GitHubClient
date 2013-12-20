@@ -164,4 +164,34 @@
   <data name="ReposPublic" xml:space="preserve">
     <value>public</value>
   </data>
+  <data name="LoginPageHint" xml:space="preserve">
+    <value>Enter your GitHub username and password to gain access to your repositories.</value>
+  </data>
+  <data name="LoginPageInvalidCredentials" xml:space="preserve">
+    <value>The provided credentials are invalid.</value>
+  </data>
+  <data name="LoginPageLogin" xml:space="preserve">
+    <value>log in</value>
+  </data>
+  <data name="LoginPageNoPassword" xml:space="preserve">
+    <value>Please provide a password.</value>
+  </data>
+  <data name="LoginPageNoUserName" xml:space="preserve">
+    <value>Please provide a user name.</value>
+  </data>
+  <data name="LoginPagePassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="LoginPageUserName" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="RepoDetailsBranches" xml:space="preserve">
+    <value>branches</value>
+  </data>
+  <data name="RepoDetailsCommits" xml:space="preserve">
+    <value>commits</value>
+  </data>
+  <data name="RepoDetailsFiles" xml:space="preserve">
+    <value>files</value>
+  </data>
 </root>
