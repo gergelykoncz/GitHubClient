@@ -2,12 +2,10 @@
 using GitHubClient.Resources;
 using GitHubClient.WebApi;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Windows;
-using System.Windows.Media.Imaging;
 
 namespace GitHubClient.ViewModels
 {
@@ -33,22 +31,10 @@ namespace GitHubClient.ViewModels
             }
         }
 
-        private BitmapImage _fileImage;
-        public BitmapImage FileImage
+        public ContentFileViewModel(string filePath)
         {
-            get
-            {
-                return _fileImage;
-            }
-            set
-            {
-                if (_fileImage != value)
-                {
-                    NotifyPropertyChanging("FileImage");
-                    _fileImage = value;
-                    NotifyPropertyChanged("FileImage");
-                }
-            }
+            FileInBatches = new Collection<string>();
+            FileName = filePath;
         }
 
         public ContentFileViewModel(string repositoryName, string path)
@@ -56,6 +42,11 @@ namespace GitHubClient.ViewModels
             FileInBatches = new Collection<string>();
             FileName = path;
             fetchFile(repositoryName, path);
+        }
+
+        public void LoadDiffFile(string diffedFile)
+        {
+            breakFileIntoBatches(diffedFile);
         }
 
         private async void fetchFile(string repositoryName, string path)
@@ -100,6 +91,18 @@ namespace GitHubClient.ViewModels
                 string currentLine = string.Empty;
                 while ((currentLine = reader.ReadLine()) != null)
                 {
+                    if (currentLine.StartsWith("-") || currentLine.StartsWith("+"))
+                    {
+                        if (currentTextBatch.ToString() != string.Empty)
+                        {
+                            FileInBatches.Add(currentTextBatch.ToString());
+                            currentTextBatch = new StringBuilder();
+                            lineCounter = 0;
+                        }
+                        FileInBatches.Add(currentLine);
+                        continue;
+                    }
+                    
                     currentTextBatch.AppendLine(currentLine);
                     if (lineCounter == 20)
                     {

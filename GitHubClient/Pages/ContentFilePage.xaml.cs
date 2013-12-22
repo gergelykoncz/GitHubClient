@@ -4,7 +4,10 @@ using GitHubClient.ViewModels;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
 using System.Windows.Navigation;
 
 namespace GitHubClient.Pages
@@ -34,11 +37,25 @@ namespace GitHubClient.Pages
             bool hasRepository = NavigationContext.QueryString.TryGetValue("repositoryName", out repositoryName);
             bool hasFilePath = NavigationContext.QueryString.TryGetValue("filePath", out filePath);
 
+            //Showing full file from repository
             if (hasRepository && hasFilePath)
             {
                 _viewModel = new ContentFileViewModel(repositoryName, filePath);
                 DataContext = _viewModel;
                 _viewModel.FileLoadingFinished += ViewModel_FileLoadingFinished;
+            }
+            //Showing diff from commit
+            else if (hasFilePath)
+            {
+                string diffedFile = AppSettingsProvider.RetrieveSetting<string>("LastDiffedFile", null);
+                if (string.IsNullOrWhiteSpace(diffedFile) == false)
+                {
+                    _viewModel = new ContentFileViewModel(filePath);
+                    _viewModel.FileLoadingFinished += ViewModel_FileLoadingFinished;
+                    DataContext = _viewModel;
+                    _viewModel.LoadDiffFile(diffedFile);
+
+                }
             }
         }
 
@@ -49,6 +66,14 @@ namespace GitHubClient.Pages
                 var block = new TextBlock();
                 block.FontSize = preferredFontSize;
                 block.Text = batch;
+                if (batch.StartsWith("+"))
+                {
+                    block.Foreground = new SolidColorBrush(Colors.Green);
+                }
+                else if (batch.StartsWith("-"))
+                {
+                    block.Foreground = new SolidColorBrush(Colors.Red);
+                }
                 fileTextHolder.Children.Add(block);
             }
         }

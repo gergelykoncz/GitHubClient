@@ -7,5 +7,6 @@
         public int Deletions { get; set; }
         public int Changes { get; set; }
         public string Status { get; set; }
+        public string Patch { get; set; }
     }
 }

@@ -65,7 +65,7 @@
             </phone:PivotItem>
 
             <phone:PivotItem Header="{Binding Path=LocalizedResources.CommitPageFiles, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector ItemsSource="{Binding Files}">
+                <phone:LongListSelector ItemsSource="{Binding Files}" Tap="LongListSelector_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
