@@ -90,8 +90,8 @@
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="4*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image VerticalAlignment="Top" Grid.Column="0" Source="{Binding Status, Converter={StaticResource CommitFileStatusValueConverter}}" Width="50" Height="50"/>
                                 <TextBlock Grid.Column="1" Text="{Binding FileName}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>

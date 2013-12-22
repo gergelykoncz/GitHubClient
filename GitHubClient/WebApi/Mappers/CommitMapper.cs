@@ -13,6 +13,7 @@ namespace GitHubClient.WebApi.Mappers
         {
             var result = new Commit();
             result.Author = model.Commit.Author;
+            result.AuthorAvatar = model.Author.AvatarUrl;
             result.Committer = model.Commit.Committer;
             result.Message = model.Commit.Message;
             result.SHA = model.SHA;

@@ -64,9 +64,16 @@
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Commits}" Tap="Commits_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding Message}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
-                            </StackPanel>
+                            <Grid Margin="0,0,0,17">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" VerticalAlignment="Top" BorderBrush="{StaticResource PhoneAccentBrush}" BorderThickness="2" Height="50">
+                                    <Image Grid.Column="0" Source="{Binding AuthorAvatar}" ></Image>
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="{Binding Message}" VerticalAlignment="Top" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+                            </Grid>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
                 </phone:LongListSelector>

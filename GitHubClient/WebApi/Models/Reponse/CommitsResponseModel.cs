@@ -8,5 +8,6 @@ namespace GitHubClient.WebApi.Models.Reponse
         public Commit Commit { get; set; }
         public IEnumerable<CommitFile> Files { get; set; }
         public string SHA { get; set; }
+        public Owner Author { get; set; }
     }
 }

@@ -7,5 +7,6 @@ namespace GitHubClient.WebApi.Entities
         public Author Committer { get; set; }
         public string Message { get; set; }
         public string SHA { get; set; }
+        public string AuthorAvatar { get; set; }
     }
 }
