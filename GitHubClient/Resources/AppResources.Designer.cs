@@ -169,6 +169,15 @@ namespace GitHubClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not connect to GitHub. Please make sure you&apos;re connected to the Internet..
+        /// </summary>
+        public static string LoginPageNoConnection {
+            get {
+                return ResourceManager.GetString("LoginPageNoConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please provide a password..
         /// </summary>
         public static string LoginPageNoPassword {
@@ -192,6 +201,15 @@ namespace GitHubClient.Resources {
         public static string LoginPagePassword {
             get {
                 return ResourceManager.GetString("LoginPagePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unknown error occurred while authenticating your credentials with GitHub. Please try again later..
+        /// </summary>
+        public static string LoginPageUnkownError {
+            get {
+                return ResourceManager.GetString("LoginPageUnkownError", resourceCulture);
             }
         }
         

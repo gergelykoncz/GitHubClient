@@ -95,7 +95,7 @@ namespace GitHubClient.ViewModels
             if (file.IsDirectory)
             {
                 var client = new GitHubApiClient();
-                var loadedFiles = await client.GetContent(UserNameProvider.GetUserName(), Name, file.Path);
+                var loadedFiles = await client.GetContent(CredentialsProvider.GetUserName(), Name, file.Path);
                 Files = new ObservableCollection<Content>(loadedFiles.OrderBy(x => x.ContentType).ThenBy(x => x.Name));
                 _currentDir = file.Path;
             }
@@ -116,7 +116,7 @@ namespace GitHubClient.ViewModels
             }
             _currentDir = parentFolder;
             var client = new GitHubApiClient();
-            var loadedFiles = await client.GetContent(UserNameProvider.GetUserName(), Name, parentFolder);
+            var loadedFiles = await client.GetContent(CredentialsProvider.GetUserName(), Name, parentFolder);
             Files = new ObservableCollection<Content>(loadedFiles.OrderBy(x => x.ContentType).ThenBy(x => x.Name));
         }
 
@@ -126,13 +126,13 @@ namespace GitHubClient.ViewModels
             {
                 IsBusy = true;
                 var client = new GitHubApiClient();
-                var loadedCommits = await client.GetCommitsForRepository(UserNameProvider.GetUserName(), Name);
+                var loadedCommits = await client.GetCommitsForRepository(CredentialsProvider.GetUserName(), Name);
                 Commits = new ObservableCollection<Commit>(loadedCommits);
 
-                var loadedFiles = await client.GetContent(UserNameProvider.GetUserName(), Name, string.Empty);
+                var loadedFiles = await client.GetContent(CredentialsProvider.GetUserName(), Name, string.Empty);
                 Files = new ObservableCollection<Content>(loadedFiles.OrderBy(x => x.ContentType).ThenBy(x => x.Name));
 
-                var loadedBranches = await client.GetBranchesForRepository(UserNameProvider.GetUserName(), Name);
+                var loadedBranches = await client.GetBranchesForRepository(CredentialsProvider.GetUserName(), Name);
                 Branches = new ObservableCollection<Branch>(loadedBranches);
             }
             catch

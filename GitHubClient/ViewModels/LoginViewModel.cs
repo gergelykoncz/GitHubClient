@@ -1,5 +1,7 @@
-﻿using GitHubClient.Resources;
+﻿using GitHubClient.Data;
+using GitHubClient.Resources;
 using GitHubClient.WebApi;
+using GitHubClient.WebApi.Web;
 using System;
 
 namespace GitHubClient.ViewModels
@@ -62,6 +64,8 @@ namespace GitHubClient.ViewModels
 
         public async void Authenticate()
         {
+            IsBusy = true;
+
             if (string.IsNullOrWhiteSpace(UserName))
             {
                 ErrorMessage = AppResources.LoginPageNoUserName;
@@ -74,21 +78,40 @@ namespace GitHubClient.ViewModels
             }
 
             var client = new GitHubApiClient();
-            bool authenticated = await client.Authenticate(UserName, Password);
-            if (!authenticated)
+            AuthenticationResult result = await client.Authenticate(UserName, Password);
+            switch (result)
             {
-                ErrorMessage = AppResources.LoginPageInvalidCredentials;
-            }
-            else
-            {
-                if (AuthenticationSuccess != null)
-                {
-                    AuthenticationSuccess(this, EventArgs.Empty);
-                }
+                case AuthenticationResult.BadCredentials:
+                    failAuthentication(AppResources.LoginPageInvalidCredentials);
+                    break;
+                case AuthenticationResult.NoConnection:
+                    failAuthentication(AppResources.LoginPageNoConnection);
+                    break;
+                case AuthenticationResult.UnknownError:
+                    failAuthentication(AppResources.LoginPageUnkownError);
+                    break;
+                case AuthenticationResult.Success:
+                    finishAutentication();
+                    break;
             }
         }
 
-        public event EventHandler AuthenticationSuccess;
+        private void finishAutentication()
+        {
+            CredentialsProvider.StoreCredentials(UserName, Password);
 
+            if (AuthenticationSuccess != null)
+            {
+                AuthenticationSuccess(this, EventArgs.Empty);
+            }
+        }
+
+        private void failAuthentication(string errorMessage)
+        {
+            IsBusy = false;
+            ErrorMessage = errorMessage;
+        }
+
+        public event EventHandler AuthenticationSuccess;
     }
 }

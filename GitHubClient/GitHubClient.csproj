@@ -93,7 +93,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\UserNameProvider.cs" />
+    <Compile Include="Data\CredentialsProvider.cs" />
+    <Compile Include="Data\Encrypter.cs" />
     <Compile Include="Helpers\CommitFileStatusValueConverter.cs" />
     <Compile Include="Helpers\ContentTypeImageValueConverter.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -134,6 +135,8 @@
     <Compile Include="WebApi\IGitHubClient.cs" />
     <Compile Include="WebApi\Mappers\CommitMapper.cs" />
     <Compile Include="WebApi\Models\Reponse\CommitsResponseModel.cs" />
+    <Compile Include="WebApi\Web\AuthenticationResult.cs" />
+    <Compile Include="WebApi\Web\BasicAuthenticationCredentialsFactory.cs" />
     <Compile Include="WebApi\Web\JsonWebClient.cs" />
   </ItemGroup>
   <ItemGroup>

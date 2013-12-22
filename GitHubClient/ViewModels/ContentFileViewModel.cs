@@ -63,7 +63,7 @@ namespace GitHubClient.ViewModels
             {
                 IsBusy = true;
                 var client = new GitHubApiClient();
-                var file = await client.GetFileContent(UserNameProvider.GetUserName(), repositoryName, path);
+                var file = await client.GetFileContent(CredentialsProvider.GetUserName(), repositoryName, path);
                 if (file != null)
                 {
                     string base64EncodedFile = file.FileContent;

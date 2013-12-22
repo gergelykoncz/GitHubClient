@@ -101,7 +101,7 @@ namespace GitHubClient.ViewModels
 
         public void Refresh()
         {
-            UserName = UserNameProvider.GetUserName();
+            UserName = CredentialsProvider.GetUserName();
             fetchRepositories();
         }
 
@@ -111,7 +111,7 @@ namespace GitHubClient.ViewModels
             {
                 IsBusy = true;
                 var gitHubClient = new GitHubApiClient();
-                var repositoriesForUser = await gitHubClient.GetRepositoriesForUser(UserNameProvider.GetUserName());
+                var repositoriesForUser = await gitHubClient.GetRepositoriesForUser(CredentialsProvider.GetUserName());
                 AllRepositories = new ObservableCollection<Repository>(repositoriesForUser);
                 PublicRepositories = new ObservableCollection<Repository>(repositoriesForUser.Where(x => !x.IsPrivate));
                 ForkedRepositories = new ObservableCollection<Repository>(repositoriesForUser.Where(x => x.IsForked));

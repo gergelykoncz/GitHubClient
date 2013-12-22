@@ -194,4 +194,10 @@
   <data name="RepoDetailsFiles" xml:space="preserve">
     <value>files</value>
   </data>
+  <data name="LoginPageNoConnection" xml:space="preserve">
+    <value>Could not connect to GitHub. Please make sure you're connected to the Internet.</value>
+  </data>
+  <data name="LoginPageUnkownError" xml:space="preserve">
+    <value>An unknown error occurred while authenticating your credentials with GitHub. Please try again later.</value>
+  </data>
 </root>

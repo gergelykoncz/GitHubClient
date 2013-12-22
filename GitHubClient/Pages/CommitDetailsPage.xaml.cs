@@ -24,7 +24,7 @@ namespace GitHubClient.Pages
 
             if (repoAvailable && commitShaAvailable)
             {
-                _viewModel = new CommitDetailsViewModel(UserNameProvider.GetUserName(), repositoryName, commitSha);
+                _viewModel = new CommitDetailsViewModel(CredentialsProvider.GetUserName(), repositoryName, commitSha);
                 DataContext = _viewModel;
             }
         }

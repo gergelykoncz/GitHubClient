@@ -65,7 +65,7 @@ namespace GitHubClient.WebApi
             return await jsonClient.Get<IEnumerable<Branch>>(endpoint);
         }
 
-        public async Task<bool> Authenticate(string userName, string password)
+        public async Task<AuthenticationResult> Authenticate(string userName, string password)
         {
             Uri endpoint = new Uri(string.Format("{0}user", GitHubApiUrl));
             var webClient = new WebClient();
@@ -74,11 +74,25 @@ namespace GitHubClient.WebApi
             try
             {
                 var result = await webClient.DownloadStringTaskAsync(endpoint);
-                return result != null;
+                return AuthenticationResult.Success;
             }
-            catch (WebException)
+            catch (WebException ex)
             {
-                return false;
+                var httpResponse = ex.Response as HttpWebResponse;
+                if (httpResponse != null)
+                {
+                    var statusCode = httpResponse.StatusCode;
+                    switch (statusCode)
+                    {
+                        case HttpStatusCode.NotFound:
+                            return AuthenticationResult.NoConnection;
+                        case HttpStatusCode.Unauthorized:
+                            return AuthenticationResult.BadCredentials;
+                        default:
+                            return AuthenticationResult.UnknownError;
+                    }
+                }
+                return AuthenticationResult.Unknown;
             }
         }
     }
