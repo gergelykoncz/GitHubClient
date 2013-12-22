@@ -221,4 +221,7 @@
   <data name="AppBarSmallerText" xml:space="preserve">
     <value>Smaller text</value>
   </data>
+  <data name="RepoDetailsDirectoryErrorMessage" xml:space="preserve">
+    <value>An error occurred while opening the directory "{0}". Please check your Internet connection.</value>
+  </data>
 </root>

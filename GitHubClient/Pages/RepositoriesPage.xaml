@@ -10,22 +10,31 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="False">
+    SupportedOrientations="PortraitOrLandscape"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
     
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator IsIndeterminate="{Binding IsBusy}" 
                                  IsVisible="{Binding IsBusy}" />
     </shell:SystemTray.ProgressIndicator>
     
-    <Grid x:Name="LayoutRoot">
-        <phone:Pivot Title="{Binding UserName, Converter={StaticResource PageTitleValueConverter}}">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="{Binding UserName, Converter={StaticResource PageTitleValueConverter}}" Style="{StaticResource PhoneTextAccentStyle}"/>
+        </StackPanel>
+        
+        <phone:Pivot Grid.Row="1">
             <phone:PivotItem Header="{Binding Path=LocalizedResources.ReposAllRepositories, Source={StaticResource LocalizedStrings}}">
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding AllRepositories}" Tap="LongListSelector_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,0,0,17">
+                            <StackPanel Margin="0,0,0,17" Orientation="Vertical">
                                 <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                <TextBlock Text="{Binding Path=Owner.Login}" TextWrapping="Wrap" Style="{StaticResource PhoneTextAccentStyle}"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
@@ -36,8 +45,9 @@
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding PublicRepositories}" Tap="LongListSelector_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,0,0,17">
+                            <StackPanel Margin="0,0,0,17" Orientation="Vertical">
                                 <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                <TextBlock Text="{Binding Path=Owner.Login}" TextWrapping="Wrap" Style="{StaticResource PhoneTextAccentStyle}"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
@@ -48,9 +58,10 @@
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding PrivateRepositories}" Tap="LongListSelector_Tap">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="0,0,0,17">
+                                <StackPanel Margin="0,0,0,17" Orientation="Vertical">
                                 <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
-                                </StackPanel>
+                                <TextBlock Text="{Binding Path=Owner.Login}" TextWrapping="Wrap" Style="{StaticResource PhoneTextAccentStyle}"/>
+                            </StackPanel>
                             </DataTemplate>
                         </phone:LongListSelector.ItemTemplate>
                     </phone:LongListSelector>
@@ -60,8 +71,9 @@
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding ForkedRepositories}" Tap="LongListSelector_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,0,0,17">
+                            <StackPanel Margin="0,0,0,17" Orientation="Vertical">
                                 <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                <TextBlock Text="{Binding Path=Owner.Login}" TextWrapping="Wrap" Style="{StaticResource PhoneTextAccentStyle}"/>
                             </StackPanel>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>

@@ -99,10 +99,22 @@ namespace GitHubClient.ViewModels
         {
             if (file.IsDirectory)
             {
-                var client = new GitHubApiClient();
-                var loadedFiles = await client.GetContent(CredentialsProvider.GetUserName(), Name, file.Path);
-                Files = new ObservableCollection<Content>(loadedFiles.OrderBy(x => x.ContentType).ThenBy(x => x.Name));
-                _currentDir = file.Path;
+                try
+                {
+                    IsBusy = true;
+                    var client = new GitHubApiClient();
+                    var loadedFiles = await client.GetContent(CredentialsProvider.GetUserName(), Name, file.Path);
+                    Files = new ObservableCollection<Content>(loadedFiles.OrderBy(x => x.ContentType).ThenBy(x => x.Name));
+                    _currentDir = file.Path;
+                }
+                catch
+                {
+                    MessageBox.Show(string.Format(AppResources.RepoDetailsDirectoryErrorMessage, file.Path), AppResources.ErrorMessageCaption, MessageBoxButton.OK);
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
             }
         }
 

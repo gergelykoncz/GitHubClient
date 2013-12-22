@@ -37,15 +37,19 @@ namespace GitHubClient.Pages
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            if (_viewModel.CanNavigateBack())
+            if (repoPivot.SelectedItem == commitPivotItem)
             {
-                e.Cancel = true;
-                _viewModel.NavigateBack();
+                if (_viewModel.CanNavigateBack())
+                {
+                    e.Cancel = true;
+                    _viewModel.NavigateBack();
+                }
+                else
+                {
+                    base.OnBackKeyPress(e);
+                }
             }
-            else
-            {
-                base.OnBackKeyPress(e);
-            }
+            base.OnBackKeyPress(e);
         }
 
         private void Files_Tap(object sender, GestureEventArgs e)

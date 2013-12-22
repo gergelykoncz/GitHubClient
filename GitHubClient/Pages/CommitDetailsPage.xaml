@@ -11,7 +11,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait"  Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
     <shell:SystemTray.ProgressIndicator>
@@ -23,8 +23,16 @@
         <Grid.Resources>
             <helpers:CommitFileStatusValueConverter x:Key="CommitFileStatusValueConverter"/>
         </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="{Binding SHA, Converter={StaticResource PageTitleValueConverter}}" Style="{StaticResource PhoneTextAccentStyle}"/>
+        </StackPanel>
         
-        <phone:Pivot Title="{Binding SHA, Converter={StaticResource PageTitleValueConverter}}">
+        <phone:Pivot Grid.Row="1">
             <phone:PivotItem Header="{Binding Path=LocalizedResources.CommitPageDetails, Source={StaticResource LocalizedStrings}}">
                 <Grid DataContext="{Binding Commit}">
                     <Grid.ColumnDefinitions>

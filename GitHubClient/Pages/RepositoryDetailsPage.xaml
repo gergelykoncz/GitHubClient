@@ -11,22 +11,32 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait"  Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator IsIndeterminate="{Binding IsBusy}" 
                                  IsVisible="{Binding IsBusy}" />
     </shell:SystemTray.ProgressIndicator>
-    
+
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.Resources>
             <helpers:ContentTypeImageValueConverter x:Key="ContentTypeImageValueConverter"/>
+            <helpers:NegateValueConverter x:Key="NegateValueConverter"/>
         </Grid.Resources>
-        
-        <phone:Pivot Title="{Binding Name, Converter={StaticResource PageTitleValueConverter}}">
-            <phone:PivotItem Header="{Binding Path=LocalizedResources.RepoDetailsFiles, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Files}" Tap="Files_Tap">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="{Binding Name, Converter={StaticResource PageTitleValueConverter}}" Style="{StaticResource PhoneTextAccentStyle}"/>
+        </StackPanel>
+
+        <phone:Pivot Grid.Row="1" x:Name="repoPivot">
+            <phone:PivotItem Header="{Binding Path=LocalizedResources.RepoDetailsFiles, Source={StaticResource LocalizedStrings}}" x:Name="commitPivotItem">
+                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Files}" Tap="Files_Tap" IsEnabled="{Binding IsBusy, Converter={StaticResource NegateValueConverter}}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17" Orientation="Horizontal">

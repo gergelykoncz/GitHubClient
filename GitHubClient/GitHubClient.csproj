@@ -134,6 +134,7 @@
     <Compile Include="WebApi\Entities\Commit.cs" />
     <Compile Include="WebApi\Entities\CommitFile.cs" />
     <Compile Include="WebApi\Entities\Content.cs" />
+    <Compile Include="WebApi\Entities\Owner.cs" />
     <Compile Include="WebApi\Entities\Repository.cs" />
     <Compile Include="WebApi\GitHubClient.cs" />
     <Compile Include="WebApi\IGitHubClient.cs" />

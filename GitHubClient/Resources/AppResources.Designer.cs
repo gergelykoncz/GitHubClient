@@ -277,6 +277,15 @@ namespace GitHubClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred while opening the directory &quot;{0}&quot;. Please check your Internet connection..
+        /// </summary>
+        public static string RepoDetailsDirectoryErrorMessage {
+            get {
+                return ResourceManager.GetString("RepoDetailsDirectoryErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error retrieving the repository &quot;{0}&quot;. Please check your Internet connection..
         /// </summary>
         public static string RepoDetailsErrorMessage {

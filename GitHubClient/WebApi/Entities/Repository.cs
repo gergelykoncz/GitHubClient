@@ -16,5 +16,7 @@ namespace GitHubClient.WebApi.Entities
 
         [JsonProperty(PropertyName = "fork")]
         public bool IsForked { get; set; }
+
+        public Owner Owner { get; set; }
     }
 }
