@@ -215,4 +215,10 @@
   <data name="ReposTitle" xml:space="preserve">
     <value>GITHUB VIEWER | {0}</value>
   </data>
+  <data name="AppBarBiggerText" xml:space="preserve">
+    <value>Bigger text</value>
+  </data>
+  <data name="AppBarSmallerText" xml:space="preserve">
+    <value>Smaller text</value>
+  </data>
 </root>

@@ -5,6 +5,8 @@ using GitHubClient.WebApi.Entities;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
+using System.ComponentModel;
+using System.Windows;
 
 namespace GitHubClient.Pages
 {
@@ -30,6 +32,11 @@ namespace GitHubClient.Pages
             CredentialsProvider.EraseCredentials();
             Uri loginPageUri = new Uri("/Pages/LoginPage.xaml", UriKind.Relative);
             NavigationService.Navigate(loginPageUri);
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            Application.Current.Terminate();
         }
 
         private void LongListSelector_Tap(object sender, System.Windows.Input.GestureEventArgs e)

@@ -1,7 +1,10 @@
-﻿using GitHubClient.ViewModels;
+﻿using GitHubClient.Resources;
+using GitHubClient.ViewModels;
 using GitHubClient.WebApi.Entities;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
@@ -15,6 +18,7 @@ namespace GitHubClient.Pages
         public RepositoryDetailsPage()
         {
             InitializeComponent();
+            buildLocalizedAppbar();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -31,12 +35,12 @@ namespace GitHubClient.Pages
             }
         }
 
-        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            if (_viewModel.CanHandleBackButton())
+            if (_viewModel.CanNavigateBack())
             {
                 e.Cancel = true;
-                _viewModel.HandleBackButton();
+                _viewModel.NavigateBack();
             }
             else
             {
@@ -80,6 +84,23 @@ namespace GitHubClient.Pages
                     NavigationService.Navigate(commitUri);
                 }
             }
+        }
+
+        private void Refresh_Click(object sender, EventArgs e)
+        {
+            _viewModel.Refresh();
+        }
+
+        /// <summary>
+        /// ApplicationBar isn't a DependencyObject, not able to bind text for items,
+        /// so we need to do it in code-behind.
+        /// </summary>
+        private void buildLocalizedAppbar()
+        {
+            ApplicationBarIconButton refreshButton = new ApplicationBarIconButton(new Uri("/Assets/Refresh.png", UriKind.Relative));
+            refreshButton.Text = AppResources.AppBarRefresh;
+            refreshButton.Click += Refresh_Click;
+            ApplicationBar.Buttons.Add(refreshButton);
         }
     }
 }

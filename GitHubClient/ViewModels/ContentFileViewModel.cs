@@ -3,6 +3,7 @@ using GitHubClient.Resources;
 using GitHubClient.WebApi;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -12,7 +13,7 @@ namespace GitHubClient.ViewModels
 {
     public class ContentFileViewModel : ViewModelBase
     {
-        public List<string> FileInBatches { get; private set; }
+        public Collection<string> FileInBatches { get; private set; }
 
         private string _fileName;
         public string FileName
@@ -52,7 +53,7 @@ namespace GitHubClient.ViewModels
 
         public ContentFileViewModel(string repositoryName, string path)
         {
-            FileInBatches = new List<string>();
+            FileInBatches = new Collection<string>();
             FileName = path;
             fetchFile(repositoryName, path);
         }

@@ -36,6 +36,7 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -93,6 +94,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\AppSettingsProvider.cs" />
     <Compile Include="Data\CredentialsProvider.cs" />
     <Compile Include="Data\Encrypter.cs" />
     <Compile Include="Helpers\CommitFileStatusValueConverter.cs" />
@@ -177,6 +179,7 @@
   <ItemGroup>
     <Content Include="Assets\add.png" />
     <Content Include="Assets\AlignmentGrid.png" />
+    <Content Include="Assets\biggerfont.png" />
     <Content Include="Assets\file.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -185,6 +188,7 @@
     <Content Include="Assets\edit.png" />
     <Content Include="Assets\folder.png" />
     <Content Include="Assets\refresh.png" />
+    <Content Include="Assets\smallerfont.png" />
     <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

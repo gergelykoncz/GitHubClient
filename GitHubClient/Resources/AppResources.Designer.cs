@@ -61,6 +61,15 @@ namespace GitHubClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bigger text.
+        /// </summary>
+        public static string AppBarBiggerText {
+            get {
+                return ResourceManager.GetString("AppBarBiggerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log out.
         /// </summary>
         public static string AppBarLogOut {
@@ -75,6 +84,15 @@ namespace GitHubClient.Resources {
         public static string AppBarRefresh {
             get {
                 return ResourceManager.GetString("AppBarRefresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smaller text.
+        /// </summary>
+        public static string AppBarSmallerText {
+            get {
+                return ResourceManager.GetString("AppBarSmallerText", resourceCulture);
             }
         }
         

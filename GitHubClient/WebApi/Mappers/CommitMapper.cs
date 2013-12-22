@@ -3,8 +3,12 @@ using GitHubClient.WebApi.Models.Reponse;
 
 namespace GitHubClient.WebApi.Mappers
 {
-    public class CommitMapper
+    public sealed class CommitMapper
     {
+        private CommitMapper()
+        {
+        }
+
         public static Commit MapToEntity(CommitsResponseModel model)
         {
             var result = new Commit();

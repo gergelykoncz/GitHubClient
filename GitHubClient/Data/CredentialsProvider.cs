@@ -9,6 +9,10 @@ namespace GitHubClient.Data
 
         private static readonly Encrypter Encrypter = new Encrypter();
 
+        private CredentialsProvider()
+        {
+        }
+
         public static string GetUserName()
         {
             var settings = IsolatedStorageSettings.ApplicationSettings;

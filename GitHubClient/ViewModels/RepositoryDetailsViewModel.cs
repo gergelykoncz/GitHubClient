@@ -90,6 +90,11 @@ namespace GitHubClient.ViewModels
             fetchData();
         }
 
+        public void Refresh()
+        {
+            fetchData();
+        }
+
         public async void HandleFile(Content file)
         {
             if (file.IsDirectory)
@@ -101,12 +106,12 @@ namespace GitHubClient.ViewModels
             }
         }
 
-        public bool CanHandleBackButton()
+        public bool CanNavigateBack()
         {
             return string.IsNullOrEmpty(_currentDir) == false;
         }
 
-        public async void HandleBackButton()
+        public async void NavigateBack()
         {
             string parentFolder = string.Empty;
             if (_currentDir.IndexOf('/') != -1)
@@ -126,6 +131,7 @@ namespace GitHubClient.ViewModels
             {
                 IsBusy = true;
                 var client = new GitHubApiClient();
+                
                 var loadedCommits = await client.GetCommitsForRepository(CredentialsProvider.GetUserName(), Name);
                 Commits = new ObservableCollection<Commit>(loadedCommits);
 
