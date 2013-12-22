@@ -194,6 +194,9 @@
   <data name="RepoDetailsFiles" xml:space="preserve">
     <value>files</value>
   </data>
+  <data name="AppBarLogOut" xml:space="preserve">
+    <value>Log out</value>
+  </data>
   <data name="LoginPageNoConnection" xml:space="preserve">
     <value>Could not connect to GitHub. Please make sure you're connected to the Internet.</value>
   </data>

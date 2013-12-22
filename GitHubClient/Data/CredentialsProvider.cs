@@ -33,9 +33,18 @@ namespace GitHubClient.Data
 
         public static void StoreCredentials(string userName, string password)
         {
+            EraseCredentials();
             var settings = IsolatedStorageSettings.ApplicationSettings;
             settings.Add(GitHubUserNameKey, Encrypter.EncryptString(userName));
             settings.Add(GitHubPasswordKey, Encrypter.EncryptString(password));
+            settings.Save();
+        }
+
+        public static void EraseCredentials()
+        {
+            var settings = IsolatedStorageSettings.ApplicationSettings;
+            settings.Remove(GitHubUserNameKey);
+            settings.Remove(GitHubPasswordKey);
             settings.Save();
         }
     }

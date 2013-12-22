@@ -1,10 +1,10 @@
-﻿using GitHubClient.Resources;
+﻿using GitHubClient.Data;
+using GitHubClient.Resources;
 using GitHubClient.ViewModels;
 using GitHubClient.WebApi.Entities;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
-using System.Windows.Controls;
 
 namespace GitHubClient.Pages
 {
@@ -23,6 +23,13 @@ namespace GitHubClient.Pages
         protected void Refresh_Click(object sender, EventArgs e)
         {
             _viewModel.Refresh();
+        }
+
+        protected void LogOutMenuItem_Click(object sender, EventArgs e)
+        {
+            CredentialsProvider.EraseCredentials();
+            Uri loginPageUri = new Uri("/Pages/LoginPage.xaml", UriKind.Relative);
+            NavigationService.Navigate(loginPageUri);
         }
 
         private void LongListSelector_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -52,7 +59,10 @@ namespace GitHubClient.Pages
             refreshButton.Text = AppResources.AppBarRefresh;
             refreshButton.Click += Refresh_Click;
             ApplicationBar.Buttons.Add(refreshButton);
-        }
 
+            ApplicationBarMenuItem logOutMenuItem = new ApplicationBarMenuItem(AppResources.AppBarLogOut);
+            logOutMenuItem.Click += LogOutMenuItem_Click;
+            ApplicationBar.MenuItems.Add(logOutMenuItem);
+        }
     }
 }
