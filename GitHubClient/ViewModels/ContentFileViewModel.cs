@@ -103,12 +103,16 @@ namespace GitHubClient.ViewModels
                         continue;
                     }
                     
-                    currentTextBatch.AppendLine(currentLine);
                     if (lineCounter == 20)
                     {
+                        currentTextBatch.Append(currentLine);
                         FileInBatches.Add(currentTextBatch.ToString());
                         currentTextBatch = new StringBuilder();
                         lineCounter = 0;
+                    }
+                    else
+                    {
+                        currentTextBatch.AppendLine(currentLine);
                     }
                     lineCounter++;
                 }

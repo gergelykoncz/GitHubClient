@@ -68,10 +68,14 @@
                 <phone:LongListSelector ItemsSource="{Binding Files}" Tap="LongListSelector_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{Binding Status, Converter={StaticResource CommitFileStatusValueConverter}}" Width="50" Height="50"/>
-                                <TextBlock Text="{Binding FileName}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
-                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image VerticalAlignment="Top" Grid.Column="0" Source="{Binding Status, Converter={StaticResource CommitFileStatusValueConverter}}" Width="50" Height="50"/>
+                                <TextBlock Grid.Column="1" Text="{Binding FileName}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+                            </Grid>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
                 </phone:LongListSelector>
