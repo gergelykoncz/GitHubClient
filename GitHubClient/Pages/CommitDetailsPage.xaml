@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:helpers="clr-namespace:GitHubClient.Helpers"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -14,11 +15,22 @@
     SupportedOrientations="PortraitOrLandscape"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideLeftFadeIn" />
+            </toolkit:NavigationInTransition.Forward>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideRightFadeIn"/>
+            </toolkit:NavigationInTransition.Backward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator IsIndeterminate="{Binding IsBusy}" 
                                  IsVisible="{Binding IsBusy}" />
     </shell:SystemTray.ProgressIndicator>
-    
+
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.Resources>
             <helpers:CommitFileStatusValueConverter x:Key="CommitFileStatusValueConverter"/>
@@ -31,7 +43,7 @@
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding SHA, Converter={StaticResource PageTitleValueConverter}}" Style="{StaticResource PhoneTextAccentStyle}"/>
         </StackPanel>
-        
+
         <phone:Pivot Grid.Row="1">
             <phone:PivotItem Header="{Binding Path=LocalizedResources.CommitPageDetails, Source={StaticResource LocalizedStrings}}">
                 <Grid DataContext="{Binding Commit}">
@@ -59,7 +71,7 @@
                         <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding Path=LocalizedResources.CommitPageDate, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
                         <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Date}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextNormalStyle}"/>
                     </Grid>
-                    
+
                     <Grid Grid.Column="0" Grid.Row="1">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -67,7 +79,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Path=LocalizedResources.CommitPageSHA, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding SHA}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextNormalStyle}"/>
-                        
+
                     </Grid>
                 </Grid>
             </phone:PivotItem>

@@ -8,6 +8,8 @@ using System.Windows.Navigation;
 
 namespace GitHubClient.Pages
 {
+    using GestureEventArgs = System.Windows.Input.GestureEventArgs;
+
     public partial class CommitDetailsPage : PhoneApplicationPage
     {
         private CommitDetailsViewModel _viewModel;
