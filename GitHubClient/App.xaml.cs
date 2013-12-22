@@ -12,8 +12,6 @@ namespace GitHubClient
 {
     public partial class App : Application
     {
-        public static string HardCodedUserName = "gergelykoncz";
-
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>

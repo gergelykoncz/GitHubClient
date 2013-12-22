@@ -9,6 +9,7 @@ you can get it from the app store as well.
 * Browsing and viewing source code files
 * Viewing diffs in your commits
 * Checking your commit history
+
 ## Why not use OctoKit.NET?
 
 This project was meant to be fun, and trying to set up a library to
