@@ -232,7 +232,7 @@ namespace GitHubClient.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GITHUB VIEWER.
+        ///   Looks up a localized string similar to GIT VIEWER.
         /// </summary>
         public static string LoginPageTitle {
             get {
@@ -349,7 +349,7 @@ namespace GitHubClient.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GITHUB VIEWER | {0}.
+        ///   Looks up a localized string similar to GIT VIEWER | {0}.
         /// </summary>
         public static string ReposTitle {
             get {

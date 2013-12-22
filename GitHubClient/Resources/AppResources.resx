@@ -204,7 +204,7 @@
     <value>Could not connect to GitHub. Please make sure you're connected to the Internet.</value>
   </data>
   <data name="LoginPageTitle" xml:space="preserve">
-    <value>GITHUB VIEWER</value>
+    <value>GIT VIEWER</value>
   </data>
   <data name="LoginPageUnkownError" xml:space="preserve">
     <value>An unknown error occurred while authenticating your credentials with GitHub. Please try again later.</value>
@@ -213,7 +213,7 @@
     <value>Error retrieving the repository "{0}". Please check your Internet connection.</value>
   </data>
   <data name="ReposTitle" xml:space="preserve">
-    <value>GITHUB VIEWER | {0}</value>
+    <value>GIT VIEWER | {0}</value>
   </data>
   <data name="AppBarBiggerText" xml:space="preserve">
     <value>Bigger text</value>

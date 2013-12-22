@@ -78,12 +78,12 @@ namespace GitHubClient.ViewModels
 
             if (string.IsNullOrWhiteSpace(UserName))
             {
-                ErrorMessage = AppResources.LoginPageNoUserName;
+                failAuthentication(AppResources.LoginPageNoUserName);
                 return;
             }
             if (string.IsNullOrWhiteSpace(Password))
             {
-                ErrorMessage = AppResources.LoginPageNoPassword;
+                failAuthentication(AppResources.LoginPageNoPassword);
                 return;
             }
 
