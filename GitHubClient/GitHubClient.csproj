@@ -193,6 +193,7 @@
     <Content Include="Assets\smallerfont.png" />
     <Content Include="Assets\Tiles\IconicTileMedium.png" />
     <Content Include="Assets\Tiles\IconicTileSmall.png" />
+    <Content Include="Assets\Tiles\StoreTile.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />

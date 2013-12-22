@@ -4,8 +4,8 @@
   <Languages xmlns="">
     <Language code="en" />
   </Languages>
-  <App xmlns="" ProductID="{000d9ca4-8455-471e-a44c-eda00155a570}" Title="Git viewer" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Gergely Koncz" Description="Sample description" Publisher="Gergely Koncz" PublisherID="{b5d56508-b00f-45e9-a351-b459ad6d08f1}">
-    <IconPath IsRelative="true" IsResource="false">Assets\Tiles\IconicTileMedium.png</IconPath>
+  <App xmlns="" ProductID="{000d9ca4-8455-471e-a44c-eda00155a570}" Title="Git viewer" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Gergely Koncz" Description="This app lets you browse your GitHub repositories, glance at your files, commits, and view diffs." Publisher="Gergely Koncz" PublisherID="{b5d56508-b00f-45e9-a351-b459ad6d08f1}">
+    <IconPath IsRelative="true" IsResource="false">Assets\Tiles\StoreTile.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
     </Capabilities>
