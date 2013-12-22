@@ -12,10 +12,10 @@ namespace GitHubClient.WebApi.Web
         {
             var client = new HttpClient();
             string basicAuthCredentials = getCredentialsForBasicAuthentication();
-            if(!string.IsNullOrWhiteSpace(basicAuthCredentials)){
+            if (!string.IsNullOrWhiteSpace(basicAuthCredentials))
+            {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", basicAuthCredentials);
             }
-            
             var result = await client.GetAsync(endpoint);
             string htmlContent = await result.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(htmlContent);

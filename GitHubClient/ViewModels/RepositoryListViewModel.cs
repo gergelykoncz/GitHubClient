@@ -119,7 +119,7 @@ namespace GitHubClient.ViewModels
             }
             catch
             {
-                MessageBox.Show(AppResources.ErrorMessageRepoFail, AppResources.ErrorMessageCaption, MessageBoxButton.OK);
+                MessageBox.Show(AppResources.ReposErrorMessage, AppResources.ErrorMessageCaption, MessageBoxButton.OK);
             }
             finally
             {

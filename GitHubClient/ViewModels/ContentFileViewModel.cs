@@ -74,7 +74,7 @@ namespace GitHubClient.ViewModels
             }
             catch
             {
-                MessageBox.Show(AppResources.ErrorMessageCaption);
+                MessageBox.Show(string.Format(AppResources.ContentFileErrorMessage, FileName), AppResources.ErrorMessageCaption, MessageBoxButton.OK);
             }
             finally
             {

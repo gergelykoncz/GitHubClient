@@ -19,7 +19,7 @@
     </shell:SystemTray.ProgressIndicator>
     
     <Grid x:Name="LayoutRoot">
-        <phone:Pivot Title="{Binding UserName}">
+        <phone:Pivot Title="{Binding UserName, Converter={StaticResource PageTitleValueConverter}}">
             <phone:PivotItem Header="{Binding Path=LocalizedResources.ReposAllRepositories, Source={StaticResource LocalizedStrings}}">
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding AllRepositories}" Tap="LongListSelector_Tap">
                     <phone:LongListSelector.ItemTemplate>

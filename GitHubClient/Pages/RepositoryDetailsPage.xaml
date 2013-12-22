@@ -24,7 +24,7 @@
             <helpers:ContentTypeImageValueConverter x:Key="ContentTypeImageValueConverter"/>
         </Grid.Resources>
         
-        <phone:Pivot Title="{Binding Name}">
+        <phone:Pivot Title="{Binding Name, Converter={StaticResource PageTitleValueConverter}}">
             <phone:PivotItem Header="{Binding Path=LocalizedResources.RepoDetailsFiles, Source={StaticResource LocalizedStrings}}">
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Files}" Tap="Files_Tap">
                     <phone:LongListSelector.ItemTemplate>

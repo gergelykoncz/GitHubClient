@@ -1,7 +1,7 @@
 ﻿using GitHubClient.Data;
+using GitHubClient.Resources;
 using GitHubClient.WebApi;
 using GitHubClient.WebApi.Entities;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -137,7 +137,7 @@ namespace GitHubClient.ViewModels
             }
             catch
             {
-                MessageBox.Show("Error");
+                MessageBox.Show(string.Format(AppResources.RepoDetailsErrorMessage, Name), AppResources.ErrorMessageCaption, MessageBoxButton.OK);
             }
             finally
             {

@@ -6,12 +6,17 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="clr-namespace:GitHubClient.Helpers"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.Resources>
+        <helpers:NegateValueConverter x:Key="NegateValueConverter"/>
+    </phone:PhoneApplicationPage.Resources>
 
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator IsIndeterminate="{Binding IsBusy}" 
@@ -25,6 +30,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="{Binding Path=LocalizedResources.LoginPageTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock Text="{Binding Path=LocalizedResources.LoginPageLogin, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
@@ -45,8 +51,8 @@
             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding UserName, Mode=TwoWay}" Margin="0 30 0 30"/>
             <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding Path=LocalizedResources.LoginPagePassword, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center"/>
             <PasswordBox Grid.Column="1" Grid.Row="2" Password="{Binding Password, Mode=TwoWay}" Margin="0 30 0 30"/>
-            <TextBlock Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Foreground="{StaticResource PhoneAccentBrush}" Text="{Binding ErrorMessage}"/>
-            <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Content="{Binding Path=LocalizedResources.LoginPageLogin, Source={StaticResource LocalizedStrings}}" Margin="20 20 20 20" Click="Button_Click"/>
+            <TextBlock Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Foreground="{StaticResource PhoneAccentBrush}" Text="{Binding ErrorMessage}" TextWrapping="Wrap"/>
+            <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Content="{Binding Path=LocalizedResources.LoginPageLogin, Source={StaticResource LocalizedStrings}}" Margin="20 20 20 20" Click="Button_Click" IsEnabled="{Binding IsBusy, Converter={StaticResource NegateValueConverter}}"/>
         </Grid>
     </Grid>
 

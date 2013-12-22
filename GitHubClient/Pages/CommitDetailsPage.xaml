@@ -24,7 +24,7 @@
             <helpers:CommitFileStatusValueConverter x:Key="CommitFileStatusValueConverter"/>
         </Grid.Resources>
         
-        <phone:Pivot Title="{Binding SHA}">
+        <phone:Pivot Title="{Binding SHA, Converter={StaticResource PageTitleValueConverter}}">
             <phone:PivotItem Header="{Binding Path=LocalizedResources.CommitPageDetails, Source={StaticResource LocalizedStrings}}">
                 <Grid DataContext="{Binding Commit}">
                     <Grid.ColumnDefinitions>

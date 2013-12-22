@@ -97,6 +97,8 @@
     <Compile Include="Data\Encrypter.cs" />
     <Compile Include="Helpers\CommitFileStatusValueConverter.cs" />
     <Compile Include="Helpers\ContentTypeImageValueConverter.cs" />
+    <Compile Include="Helpers\NegateValueConverter.cs" />
+    <Compile Include="Helpers\PageTitleValueConverter.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Pages\CommitDetailsPage.xaml.cs">
       <DependentUpon>CommitDetailsPage.xaml</DependentUpon>

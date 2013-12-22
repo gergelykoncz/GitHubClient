@@ -133,20 +133,20 @@ namespace GitHubClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred while loading the file &quot;{0}&quot;. Please check your Internet connection..
+        /// </summary>
+        public static string ContentFileErrorMessage {
+            get {
+                return ResourceManager.GetString("ContentFileErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string ErrorMessageCaption {
             get {
                 return ResourceManager.GetString("ErrorMessageCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to fetch repositories. Please make sure you&apos;re connected to the Internet..
-        /// </summary>
-        public static string ErrorMessageRepoFail {
-            get {
-                return ResourceManager.GetString("ErrorMessageRepoFail", resourceCulture);
             }
         }
         
@@ -214,6 +214,15 @@ namespace GitHubClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GITHUB VIEWER.
+        /// </summary>
+        public static string LoginPageTitle {
+            get {
+                return ResourceManager.GetString("LoginPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An unknown error occurred while authenticating your credentials with GitHub. Please try again later..
         /// </summary>
         public static string LoginPageUnkownError {
@@ -250,6 +259,15 @@ namespace GitHubClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error retrieving the repository &quot;{0}&quot;. Please check your Internet connection..
+        /// </summary>
+        public static string RepoDetailsErrorMessage {
+            get {
+                return ResourceManager.GetString("RepoDetailsErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to files.
         /// </summary>
         public static string RepoDetailsFiles {
@@ -264,6 +282,15 @@ namespace GitHubClient.Resources {
         public static string ReposAllRepositories {
             get {
                 return ResourceManager.GetString("ReposAllRepositories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to fetch repositories. Please make sure you&apos;re connected to the Internet..
+        /// </summary>
+        public static string ReposErrorMessage {
+            get {
+                return ResourceManager.GetString("ReposErrorMessage", resourceCulture);
             }
         }
         
@@ -291,6 +318,15 @@ namespace GitHubClient.Resources {
         public static string ReposPublic {
             get {
                 return ResourceManager.GetString("ReposPublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GITHUB VIEWER | {0}.
+        /// </summary>
+        public static string ReposTitle {
+            get {
+                return ResourceManager.GetString("ReposTitle", resourceCulture);
             }
         }
         

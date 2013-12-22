@@ -62,6 +62,16 @@ namespace GitHubClient.ViewModels
             }
         }
 
+        public LoginViewModel()
+        {
+            UserName = CredentialsProvider.GetUserName();
+            Password = CredentialsProvider.GetPassword();
+            if ((!string.IsNullOrWhiteSpace(UserName)) && (!string.IsNullOrWhiteSpace(Password)))
+            {
+                Authenticate();
+            }
+        }
+
         public async void Authenticate()
         {
             IsBusy = true;
@@ -98,6 +108,7 @@ namespace GitHubClient.ViewModels
 
         private void finishAutentication()
         {
+            IsBusy = false;
             CredentialsProvider.StoreCredentials(UserName, Password);
 
             if (AuthenticationSuccess != null)

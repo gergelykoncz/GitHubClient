@@ -27,11 +27,11 @@ namespace GitHubClient.Pages
             {
                 _viewModel = new ContentFileViewModel(repositoryName, filePath);
                 DataContext = _viewModel;
-                _viewModel.FileLoadingFinished += _viewModel_FileLoadingFinished;
+                _viewModel.FileLoadingFinished += ViewModel_FileLoadingFinished;
             }
         }
 
-        private void _viewModel_FileLoadingFinished(object sender, EventArgs e)
+        private void ViewModel_FileLoadingFinished(object sender, EventArgs e)
         {
             foreach (string batch in _viewModel.FileInBatches)
             {
