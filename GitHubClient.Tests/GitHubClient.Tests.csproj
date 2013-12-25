@@ -75,8 +75,12 @@
     </Compile>
     <Compile Include="Data\AppSettingsProviderTests.cs" />
     <Compile Include="Data\BranchesProviderTests.cs" />
+    <Compile Include="Data\CredentialsProviderTests.cs" />
     <Compile Include="Data\Mocks\AppSettingsProviderFake.cs" />
     <Compile Include="Helpers\BranchTitleValueConverterTests.cs" />
+    <Compile Include="Helpers\NegateValueConverterTests.cs" />
+    <Compile Include="Helpers\PageTitleValueConverterTests.cs" />
+    <Compile Include="Infrastructure\NinjectContainerTests.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -87,6 +91,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="WebApi\Web\BasicAuthenticationCredentialsFactoryTests.cs" />
+    <Compile Include="WebApi\Web\Mocks\CredentialsProviderFake.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

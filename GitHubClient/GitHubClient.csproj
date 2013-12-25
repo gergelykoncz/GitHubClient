@@ -149,6 +149,7 @@
     <Compile Include="WebApi\Models\Reponse\CommitsResponseModel.cs" />
     <Compile Include="WebApi\Web\AuthenticationResult.cs" />
     <Compile Include="WebApi\Web\BasicAuthenticationCredentialsFactory.cs" />
+    <Compile Include="WebApi\Web\IBasicAuthenticationCredentialsFactory.cs" />
     <Compile Include="WebApi\Web\JsonWebClient.cs" />
   </ItemGroup>
   <ItemGroup>

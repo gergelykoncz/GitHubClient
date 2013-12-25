@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GitHubClient.WebApi.Web
 {
-    public class BasicAuthenticationCredentialsFactory
+    public class BasicAuthenticationCredentialsFactory : IBasicAuthenticationCredentialsFactory
     {
         private readonly ICredentialsProvider _credentialsProvider;
 

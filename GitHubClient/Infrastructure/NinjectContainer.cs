@@ -22,7 +22,7 @@ namespace GitHubClient.Infrastructure
                 kernel.Bind<IBranchesProvider>().To<BranchesProvider>();
                 kernel.Bind<CommitMapper>().ToSelf();
                 kernel.Bind<ICredentialsProvider>().To<CredentialsProvider>();
-                kernel.Bind<BasicAuthenticationCredentialsFactory>().ToSelf();
+                kernel.Bind<IBasicAuthenticationCredentialsFactory>().To<BasicAuthenticationCredentialsFactory>();
                 kernel.Bind<JsonWebClient>().ToSelf();
                 kernel.Bind<IGitHubApiClient>().To<GitHubApiClient>();
 

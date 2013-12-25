@@ -8,9 +8,9 @@ namespace GitHubClient.WebApi.Web
 {
     public class JsonWebClient
     {
-        private readonly BasicAuthenticationCredentialsFactory _basicAuthCredentialsFactory;
+        private readonly IBasicAuthenticationCredentialsFactory _basicAuthCredentialsFactory;
 
-        public JsonWebClient(BasicAuthenticationCredentialsFactory basicAuthCredentialsFactory)
+        public JsonWebClient(IBasicAuthenticationCredentialsFactory basicAuthCredentialsFactory)
         {
             _basicAuthCredentialsFactory = basicAuthCredentialsFactory;
         }
