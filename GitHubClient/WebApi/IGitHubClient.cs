@@ -8,12 +8,12 @@ namespace GitHubClient.WebApi
 {
     public interface IGitHubApiClient
     {
-        Task<IEnumerable<Repository>> GetRepositoriesForUser(string userName);
-        Task<IEnumerable<Commit>> GetCommitsForRepository(string userName, string repository);
-        Task<CommitsResponseModel> GetFilesForCommit(string userName, string repository, string commitSha);
-        Task<IEnumerable<Content>> GetContent(string userName, string repository, string path);
-        Task<Content> GetFileContent(string userName, string repository, string path);
-        Task<IEnumerable<Branch>> GetBranchesForRepository(string userName, string repository);
+        Task<IEnumerable<Repository>> GetRepositories();
+        Task<IEnumerable<Commit>> GetCommitsForRepository(string repository);
+        Task<CommitsResponseModel> GetFilesForCommit(string repository, string commitSha);
+        Task<IEnumerable<Content>> GetContent(string repository, string path);
+        Task<Content> GetFileContent(string repository, string path);
+        Task<IEnumerable<Branch>> GetBranchesForRepository(string repository);
         Task<AuthenticationResult> Authenticate(string userName, string password);
     }
 }

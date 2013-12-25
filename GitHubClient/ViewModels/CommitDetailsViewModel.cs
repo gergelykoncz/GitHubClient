@@ -63,19 +63,19 @@ namespace GitHubClient.ViewModels
             }
         }
 
-        public CommitDetailsViewModel(string userName, string repository, string sha)
+        public CommitDetailsViewModel(string repository, string sha)
         {
             SHA = sha;
-            fetchCommit(userName, repository, sha);
+            fetchCommit(repository, sha);
         }
 
-        private async void fetchCommit(string userName, string repository, string sha)
+        private async void fetchCommit(string repository, string sha)
         {
             try
             {
                 IsBusy = true;
                 var client = new GitHubApiClient();
-                CommitsResponseModel commit = await client.GetFilesForCommit(userName, repository, sha);
+                CommitsResponseModel commit = await client.GetFilesForCommit(repository, sha);
                 Files = new ObservableCollection<CommitFile>(commit.Files);
                 Commit = commit.Commit;
             }

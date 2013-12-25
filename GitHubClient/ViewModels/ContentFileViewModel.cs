@@ -1,5 +1,4 @@
-﻿using GitHubClient.Data;
-using GitHubClient.Resources;
+﻿using GitHubClient.Resources;
 using GitHubClient.WebApi;
 using System;
 using System.Collections.ObjectModel;
@@ -55,7 +54,7 @@ namespace GitHubClient.ViewModels
             {
                 IsBusy = true;
                 var client = new GitHubApiClient();
-                var file = await client.GetFileContent(CredentialsProvider.GetUserName(), repositoryName, path);
+                var file = await client.GetFileContent(repositoryName, path);
                 if (file != null)
                 {
                     string base64EncodedFile = file.FileContent;

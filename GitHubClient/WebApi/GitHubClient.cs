@@ -1,4 +1,5 @@
-﻿using GitHubClient.WebApi.Entities;
+﻿using GitHubClient.Data;
+using GitHubClient.WebApi.Entities;
 using GitHubClient.WebApi.Mappers;
 using GitHubClient.WebApi.Models.Reponse;
 using GitHubClient.WebApi.Web;
@@ -12,19 +13,37 @@ namespace GitHubClient.WebApi
 {
     public class GitHubApiClient : IGitHubApiClient
     {
-        public static string GitHubApiUrl = "https://api.github.com/";
+        public static string GitHubApiUrl = "https://api.github.com";
 
-        public async Task<IEnumerable<Repository>> GetRepositoriesForUser(string userName)
+        private readonly BranchesProvider _branchesProvider;
+        private readonly string _currentUserName;
+
+        public GitHubApiClient()
         {
-            Uri endpoint = new Uri(string.Format("{0}users/{1}/repos", GitHubApiUrl, userName));
+            _branchesProvider = new BranchesProvider();
+            _currentUserName = CredentialsProvider.GetUserName();
+        }
+
+        public async Task<IEnumerable<Repository>> GetRepositories()
+        {
+            Uri endpoint = new Uri(string.Format("{0}/users/{1}/repos", GitHubApiUrl, _currentUserName));
             var jsonClient = new JsonWebClient();
             return await jsonClient.Get<IEnumerable<Repository>>(endpoint);
         }
 
-        public async Task<IEnumerable<Commit>> GetCommitsForRepository(string userName, string repository)
+        public async Task<IEnumerable<Commit>> GetCommitsForRepository(string repository)
         {
             var result = new List<Commit>();
-            Uri endpoint = new Uri(string.Format("{0}repos/{1}/{2}/commits", GitHubApiUrl, userName, repository));
+            var endpointString = new StringBuilder();
+            endpointString.AppendFormat("{0}/repos/{1}/{2}/commits", GitHubApiUrl, _currentUserName, repository);
+
+            string currentBranch = _branchesProvider.GetBranchForRepository(repository);
+            if (currentBranch != Branch.Master)
+            {
+                endpointString.AppendFormat("?sha={0}", currentBranch);
+            }
+
+            Uri endpoint = new Uri(endpointString.ToString());
             var jsonClient = new JsonWebClient();
             var commits = await jsonClient.Get<IEnumerable<CommitsResponseModel>>(endpoint);
             foreach (var commitResult in commits)
@@ -34,40 +53,58 @@ namespace GitHubClient.WebApi
             return result;
         }
 
-        public async Task<CommitsResponseModel> GetFilesForCommit(string userName, string repository, string commitSha)
+        public async Task<CommitsResponseModel> GetFilesForCommit(string repository, string commitSha)
         {
-            Uri endpoint = new Uri(string.Format("{0}repos/{1}/{2}/commits/{3}", GitHubApiUrl, userName, repository, commitSha));
+            Uri endpoint = new Uri(string.Format("{0}/repos/{1}/{2}/commits/{3}", GitHubApiUrl, _currentUserName, repository, commitSha));
             var jsonClient = new JsonWebClient();
             var commitResult = await jsonClient.Get<CommitsResponseModel>(endpoint);
             commitResult.Commit = CommitMapper.MapToEntity(commitResult);
             return commitResult;
         }
 
-        public async Task<IEnumerable<Content>> GetContent(string userName, string repository, string path)
+        public async Task<IEnumerable<Content>> GetContent(string repository, string path)
         {
-            Uri endpoint = new Uri(string.Format("{0}repos/{1}/{2}/contents/{3}", GitHubApiUrl, userName, repository, path));
+            var endpointString = new StringBuilder();
+            endpointString.AppendFormat("{0}/repos/{1}/{2}/contents/{3}", GitHubApiUrl, _currentUserName, repository, path);
+            
+            string currentBranch = _branchesProvider.GetBranchForRepository(repository);
+            if (currentBranch != Branch.Master)
+            {
+                endpointString.AppendFormat("?ref={0}", currentBranch);
+            }
+
+            Uri endpoint = new Uri(endpointString.ToString());
             var jsonClient = new JsonWebClient();
             return await jsonClient.Get<IEnumerable<Content>>(endpoint);
         }
 
-        public async Task<Content> GetFileContent(string userName, string repository, string path)
+        public async Task<Content> GetFileContent(string repository, string path)
         {
-            Uri endpoint = new Uri(string.Format("{0}repos/{1}/{2}/contents/{3}", GitHubApiUrl, userName, repository, path));
+            var endpointString = new StringBuilder();
+            endpointString.AppendFormat("{0}/repos/{1}/{2}/contents/{3}", GitHubApiUrl, _currentUserName, repository, path);
+
+            string currentBranch = _branchesProvider.GetBranchForRepository(repository);
+            if (currentBranch != Branch.Master)
+            {
+                endpointString.AppendFormat("?ref={0}", currentBranch);
+            }
+
+            Uri endpoint = new Uri(endpointString.ToString());
             var jsonClient = new JsonWebClient();
             return await jsonClient.Get<Content>(endpoint);
         }
 
 
-        public async Task<IEnumerable<Branch>> GetBranchesForRepository(string userName, string repository)
+        public async Task<IEnumerable<Branch>> GetBranchesForRepository(string repository)
         {
-            Uri endpoint = new Uri(string.Format("{0}repos/{1}/{2}/branches", GitHubApiUrl, userName, repository));
+            Uri endpoint = new Uri(string.Format("{0}/repos/{1}/{2}/branches", GitHubApiUrl, _currentUserName, repository));
             var jsonClient = new JsonWebClient();
             return await jsonClient.Get<IEnumerable<Branch>>(endpoint);
         }
 
         public async Task<AuthenticationResult> Authenticate(string userName, string password)
         {
-            Uri endpoint = new Uri(string.Format("{0}user", GitHubApiUrl));
+            Uri endpoint = new Uri(string.Format("{0}/user", GitHubApiUrl));
             var webClient = new WebClient();
             string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userName + ":" + password));
             webClient.Headers[HttpRequestHeader.Authorization] = "Basic " + credentials;

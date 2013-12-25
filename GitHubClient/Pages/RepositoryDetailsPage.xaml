@@ -44,6 +44,7 @@
 
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding Name, Converter={StaticResource PageTitleValueConverter}}" Style="{StaticResource PhoneTextAccentStyle}"/>
+            <TextBlock Text="{Binding CurrentBranch, Converter={StaticResource BranchTitleValueConverter}}" Style="{StaticResource PhoneTextAccentStyle}"/>
         </StackPanel>
 
         <phone:Pivot Grid.Row="1" x:Name="repoPivot">
@@ -80,7 +81,7 @@
             </phone:PivotItem>
 
             <phone:PivotItem Header="{Binding Path=LocalizedResources.RepoDetailsBranches, Source={StaticResource LocalizedStrings}}">
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Branches}">
+                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Branches}" Tap="Branches_Tap">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17">

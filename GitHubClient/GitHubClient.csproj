@@ -95,8 +95,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\AppSettingsProvider.cs" />
+    <Compile Include="Data\BranchesProvider.cs" />
     <Compile Include="Data\CredentialsProvider.cs" />
     <Compile Include="Data\Encrypter.cs" />
+    <Compile Include="Helpers\BranchTitleValueConverter.cs" />
     <Compile Include="Helpers\CommitFileStatusValueConverter.cs" />
     <Compile Include="Helpers\ContentTypeImageValueConverter.cs" />
     <Compile Include="Helpers\NegateValueConverter.cs" />
@@ -171,7 +173,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="GitHubClient_2013_12_22_18_18_47.sap" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">

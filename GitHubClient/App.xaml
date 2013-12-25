@@ -10,6 +10,7 @@
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:GitHubClient" x:Key="LocalizedStrings"/>
         <helpers:PageTitleValueConverter x:Key="PageTitleValueConverter"/>
+        <helpers:BranchTitleValueConverter x:Key="BranchTitleValueConverter"/>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

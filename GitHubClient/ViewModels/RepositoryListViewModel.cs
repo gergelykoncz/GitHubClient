@@ -111,7 +111,7 @@ namespace GitHubClient.ViewModels
             {
                 IsBusy = true;
                 var gitHubClient = new GitHubApiClient();
-                var repositoriesForUser = await gitHubClient.GetRepositoriesForUser(CredentialsProvider.GetUserName());
+                var repositoriesForUser = await gitHubClient.GetRepositories();
                 AllRepositories = new ObservableCollection<Repository>(repositoriesForUser);
                 PublicRepositories = new ObservableCollection<Repository>(repositoriesForUser.Where(x => !x.IsPrivate));
                 ForkedRepositories = new ObservableCollection<Repository>(repositoriesForUser.Where(x => x.IsForked));

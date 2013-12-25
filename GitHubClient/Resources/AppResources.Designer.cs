@@ -97,6 +97,15 @@ namespace GitHubClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to On branch {0}.
+        /// </summary>
+        public static string BranchesTitle {
+            get {
+                return ResourceManager.GetString("BranchesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author.
         /// </summary>
         public static string CommitPageAuthor {
@@ -264,6 +273,24 @@ namespace GitHubClient.Resources {
         public static string RepoDetailsBranches {
             get {
                 return ResourceManager.GetString("RepoDetailsBranches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Branch changed.
+        /// </summary>
+        public static string RepoDetailsBranchSwitchCaption {
+            get {
+                return ResourceManager.GetString("RepoDetailsBranchSwitchCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected branch on &quot;{0}&quot; is now &quot;{1}&quot;..
+        /// </summary>
+        public static string RepoDetailsBranchSwitchMessage {
+            get {
+                return ResourceManager.GetString("RepoDetailsBranchSwitchMessage", resourceCulture);
             }
         }
         

@@ -224,4 +224,13 @@
   <data name="RepoDetailsDirectoryErrorMessage" xml:space="preserve">
     <value>An error occurred while opening the directory "{0}". Please check your Internet connection.</value>
   </data>
+  <data name="BranchesTitle" xml:space="preserve">
+    <value>On branch {0}</value>
+  </data>
+  <data name="RepoDetailsBranchSwitchCaption" xml:space="preserve">
+    <value>Branch changed</value>
+  </data>
+  <data name="RepoDetailsBranchSwitchMessage" xml:space="preserve">
+    <value>The selected branch on "{0}" is now "{1}".</value>
+  </data>
 </root>

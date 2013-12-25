@@ -5,11 +5,11 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
 using System.ComponentModel;
-using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace GitHubClient.Pages
 {
+    using System.Windows;
     using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
     public partial class RepositoryDetailsPage : PhoneApplicationPage
@@ -56,39 +56,39 @@ namespace GitHubClient.Pages
 
         private void Files_Tap(object sender, GestureEventArgs e)
         {
-            var longListSelector = sender as LongListSelector;
-            if (longListSelector != null)
+            var content = getSelection<Content>(sender);
+            if (content != null)
             {
-                if (longListSelector.SelectedItem != null)
+                if (content.IsDirectory)
                 {
-                    var content = longListSelector.SelectedItem as Content;
-                    if (content != null)
-                    {
-                        if (content.IsDirectory)
-                        {
-                            _viewModel.HandleFile(content);
-                        }
-                        else
-                        {
-                            var fileUri = new Uri(string.Format("/Pages/ContentFilePage.xaml?repositoryName={0}&filePath={1}", _repositoryName, content.Path), UriKind.Relative);
-                            NavigationService.Navigate(fileUri);
-                        }
-                    }
+                    _viewModel.HandleFile(content);
+                }
+                else
+                {
+                    var fileUri = new Uri(string.Format("/Pages/ContentFilePage.xaml?repositoryName={0}&filePath={1}", _repositoryName, content.Path), UriKind.Relative);
+                    NavigationService.Navigate(fileUri);
                 }
             }
         }
 
         private void Commits_Tap(object sender, GestureEventArgs e)
         {
-            var longListSelector = sender as LongListSelector;
-            if (longListSelector != null)
+            Commit commit = getSelection<Commit>(sender);
+            if (commit != null)
             {
-                if (longListSelector.SelectedItem != null)
-                {
-                    var commit = longListSelector.SelectedItem as Commit;
-                    var commitUri = new Uri(string.Format("/Pages/CommitDetailsPage.xaml?repositoryName={0}&commitSha={1}", _repositoryName, commit.SHA), UriKind.Relative);
-                    NavigationService.Navigate(commitUri);
-                }
+                var commitUri = new Uri(string.Format("/Pages/CommitDetailsPage.xaml?repositoryName={0}&commitSha={1}", _repositoryName, commit.SHA), UriKind.Relative);
+                NavigationService.Navigate(commitUri);
+            }
+        }
+
+        private void Branches_Tap(object sender, GestureEventArgs e)
+        {
+            Branch branch = getSelection<Branch>(sender);
+            if (branch != null)
+            {
+                _viewModel.SwitchBranch(branch.Name);
+                _viewModel.Refresh();
+                MessageBox.Show(string.Format(AppResources.RepoDetailsBranchSwitchMessage, _viewModel.Name, branch.Name), AppResources.RepoDetailsBranchSwitchCaption, MessageBoxButton.OK);
             }
         }
 
@@ -107,6 +107,19 @@ namespace GitHubClient.Pages
             refreshButton.Text = AppResources.AppBarRefresh;
             refreshButton.Click += Refresh_Click;
             ApplicationBar.Buttons.Add(refreshButton);
+        }
+
+        private T getSelection<T>(object longListSelectorCandidate) where T : class
+        {
+            var longListSelector = longListSelectorCandidate as LongListSelector;
+            if (longListSelector != null)
+            {
+                if (longListSelector.SelectedItem != null)
+                {
+                    return longListSelector.SelectedItem as T;
+                }
+            }
+            return null;
         }
     }
 }

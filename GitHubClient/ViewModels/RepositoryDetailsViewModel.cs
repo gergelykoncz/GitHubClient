@@ -30,6 +30,24 @@ namespace GitHubClient.ViewModels
             }
         }
 
+        private string _currentBranch;
+        public string CurrentBranch
+        {
+            get
+            {
+                return _currentBranch;
+            }
+            set
+            {
+                if (_currentBranch != value)
+                {
+                    NotifyPropertyChanging("CurrentBranch");
+                    _currentBranch = value;
+                    NotifyPropertyChanged("CurrentBranch");
+                }
+            }
+        }
+
         private ObservableCollection<Commit> _commits;
         public ObservableCollection<Commit> Commits
         {
@@ -88,6 +106,8 @@ namespace GitHubClient.ViewModels
         {
             Name = repoName;
             fetchData();
+            var branchesProvider = new BranchesProvider();
+            CurrentBranch = branchesProvider.GetBranchForRepository(repoName);
         }
 
         public void Refresh()
@@ -103,7 +123,7 @@ namespace GitHubClient.ViewModels
                 {
                     IsBusy = true;
                     var client = new GitHubApiClient();
-                    var loadedFiles = await client.GetContent(CredentialsProvider.GetUserName(), Name, file.Path);
+                    var loadedFiles = await client.GetContent(Name, file.Path);
                     Files = new ObservableCollection<Content>(loadedFiles.OrderBy(x => x.ContentType).ThenBy(x => x.Name));
                     _currentDir = file.Path;
                 }
@@ -133,8 +153,15 @@ namespace GitHubClient.ViewModels
             }
             _currentDir = parentFolder;
             var client = new GitHubApiClient();
-            var loadedFiles = await client.GetContent(CredentialsProvider.GetUserName(), Name, parentFolder);
+            var loadedFiles = await client.GetContent(Name, parentFolder);
             Files = new ObservableCollection<Content>(loadedFiles.OrderBy(x => x.ContentType).ThenBy(x => x.Name));
+        }
+
+        public void SwitchBranch(string branchName)
+        {
+            var branchesProvider = new BranchesProvider();
+            branchesProvider.SetBranchForRepository(Name, branchName);
+            CurrentBranch = branchName;
         }
 
         private async void fetchData()
@@ -144,13 +171,13 @@ namespace GitHubClient.ViewModels
                 IsBusy = true;
                 var client = new GitHubApiClient();
                 
-                var loadedCommits = await client.GetCommitsForRepository(CredentialsProvider.GetUserName(), Name);
+                var loadedCommits = await client.GetCommitsForRepository(Name);
                 Commits = new ObservableCollection<Commit>(loadedCommits);
 
-                var loadedFiles = await client.GetContent(CredentialsProvider.GetUserName(), Name, string.Empty);
+                var loadedFiles = await client.GetContent(Name, string.Empty);
                 Files = new ObservableCollection<Content>(loadedFiles.OrderBy(x => x.ContentType).ThenBy(x => x.Name));
 
-                var loadedBranches = await client.GetBranchesForRepository(CredentialsProvider.GetUserName(), Name);
+                var loadedBranches = await client.GetBranchesForRepository(Name);
                 Branches = new ObservableCollection<Branch>(loadedBranches);
             }
             catch

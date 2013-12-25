@@ -3,7 +3,6 @@ using GitHubClient.ViewModels;
 using GitHubClient.WebApi.Entities;
 using Microsoft.Phone.Controls;
 using System;
-using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace GitHubClient.Pages
@@ -31,7 +30,7 @@ namespace GitHubClient.Pages
 
                 if (repoAvailable && commitShaAvailable)
                 {
-                    _viewModel = new CommitDetailsViewModel(CredentialsProvider.GetUserName(), repositoryName, commitSha);
+                    _viewModel = new CommitDetailsViewModel(repositoryName, commitSha);
                     DataContext = _viewModel;
                 }
             }
