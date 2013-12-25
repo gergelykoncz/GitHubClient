@@ -10,7 +10,7 @@ namespace GitHubClient.ViewModels
 {
     public class RepositoryListViewModel : ViewModelBase
     {
-        private readonly CredentialsProvider _credentialsProvider;
+        private readonly ICredentialsProvider _credentialsProvider;
         private readonly IGitHubApiClient _githubApiClient;
 
         private ObservableCollection<Repository> _allRepositories;
@@ -97,7 +97,7 @@ namespace GitHubClient.ViewModels
             }
         }
 
-        public RepositoryListViewModel(CredentialsProvider credentialsProvider,
+        public RepositoryListViewModel(ICredentialsProvider credentialsProvider,
             IGitHubApiClient githubApiClient)
         {
             _credentialsProvider = credentialsProvider;

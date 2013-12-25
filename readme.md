@@ -14,13 +14,4 @@ you can get it from the app store as well.
 
 This project was meant to be fun, and trying to set up a library to
 support WP8 is not fun. So I decided that I might as well write the few 
-API calls needed for this app .
-
-## Where are the unit tests?
-
-Sadly there's no decent support for unit tests in WP8. Running tests
-on the device feels awkward for me, and I don't intend to buy Windows 8 Pro
-just to run them in a simulator.
-
-I believe that unit tests should be run very often, without interrupting the
-workflow. This is not yet supported on WP8.
+API calls needed for this app.

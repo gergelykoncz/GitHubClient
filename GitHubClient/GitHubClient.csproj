@@ -98,6 +98,10 @@
     <Compile Include="Data\BranchesProvider.cs" />
     <Compile Include="Data\CredentialsProvider.cs" />
     <Compile Include="Data\Encrypter.cs" />
+    <Compile Include="Data\IAppSettingsProvider.cs" />
+    <Compile Include="Data\IBranchesProvider.cs" />
+    <Compile Include="Data\ICredentialsProvider.cs" />
+    <Compile Include="Data\IEncrypter.cs" />
     <Compile Include="Helpers\BranchTitleValueConverter.cs" />
     <Compile Include="Helpers\CommitFileStatusValueConverter.cs" />
     <Compile Include="Helpers\ContentTypeImageValueConverter.cs" />

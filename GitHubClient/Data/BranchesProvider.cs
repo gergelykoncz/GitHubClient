@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace GitHubClient.Data
 {
-    public class BranchesProvider
+    public class BranchesProvider : IBranchesProvider 
     {
         private readonly string BranchesKey = "Branches";
-        private readonly AppSettingsProvider _appSettingsProvider;
+        private readonly IAppSettingsProvider _appSettingsProvider;
         private readonly Dictionary<string, string> _cachedResult;
 
-        public BranchesProvider(AppSettingsProvider appSettingsProvider)
+        public BranchesProvider(IAppSettingsProvider appSettingsProvider)
         {
             _appSettingsProvider = appSettingsProvider;
             _cachedResult = _appSettingsProvider.RetrieveSetting<Dictionary<string, string>>(BranchesKey, new Dictionary<string, string>());

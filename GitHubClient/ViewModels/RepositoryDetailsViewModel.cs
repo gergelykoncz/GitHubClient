@@ -10,7 +10,7 @@ namespace GitHubClient.ViewModels
 {
     public class RepositoryDetailsViewModel : ViewModelBase
     {
-        private readonly BranchesProvider _branchesProvider;
+        private readonly IBranchesProvider _branchesProvider;
         private readonly IGitHubApiClient _githubApiClient;
 
         private string _currentDir = string.Empty;
@@ -105,7 +105,7 @@ namespace GitHubClient.ViewModels
             }
         }
 
-        public RepositoryDetailsViewModel(BranchesProvider branchesProvider,
+        public RepositoryDetailsViewModel(IBranchesProvider branchesProvider,
             IGitHubApiClient githubApiClient)
         {
             _branchesProvider = branchesProvider;

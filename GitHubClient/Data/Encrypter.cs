@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GitHubClient.Data
 {
-    public class Encrypter
+    public class Encrypter : IEncrypter
     {
         public string EncryptString(string value)
         {

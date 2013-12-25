@@ -2,14 +2,14 @@
 
 namespace GitHubClient.Data
 {
-    public class CredentialsProvider
+    public class CredentialsProvider : ICredentialsProvider
     {
         private readonly string GitHubUserNameKey = "GitHubUserName";
         private readonly string GitHubPasswordKey = "GitHubPassword";
 
-        private readonly Encrypter _encrypter;
+        private readonly IEncrypter _encrypter;
 
-        public CredentialsProvider(Encrypter encrypter)
+        public CredentialsProvider(IEncrypter encrypter)
         {
             _encrypter = encrypter;
         }

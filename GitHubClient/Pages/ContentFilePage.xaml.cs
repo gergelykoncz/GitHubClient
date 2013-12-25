@@ -20,12 +20,12 @@ namespace GitHubClient.Pages
         private double preferredFontSize;
 
         private ContentFileViewModel _viewModel;
-        private readonly AppSettingsProvider _appSettingsProvider;
+        private readonly IAppSettingsProvider _appSettingsProvider;
 
         public ContentFilePage()
         {
             InitializeComponent();
-            _appSettingsProvider = new AppSettingsProvider();
+            _appSettingsProvider = NinjectContainer.Get<IAppSettingsProvider>();
             buildLocalizedAppbar();
             preferredFontSize = _appSettingsProvider.RetrieveSetting<double>(FontSizeSettingName, DefaultFontSize);
         }

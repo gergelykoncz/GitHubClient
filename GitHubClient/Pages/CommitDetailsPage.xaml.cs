@@ -12,13 +12,13 @@ namespace GitHubClient.Pages
 
     public partial class CommitDetailsPage : PhoneApplicationPage
     {
-        private readonly AppSettingsProvider _appSettingsProvider;
+        private readonly IAppSettingsProvider _appSettingsProvider;
         private CommitDetailsViewModel _viewModel;
 
         public CommitDetailsPage()
         {
             InitializeComponent();
-            _appSettingsProvider = NinjectContainer.Get<AppSettingsProvider>();
+            _appSettingsProvider = NinjectContainer.Get<IAppSettingsProvider>();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

@@ -6,9 +6,9 @@ namespace GitHubClient.WebApi.Web
 {
     public class BasicAuthenticationCredentialsFactory
     {
-        private readonly CredentialsProvider _credentialsProvider;
+        private readonly ICredentialsProvider _credentialsProvider;
 
-        public BasicAuthenticationCredentialsFactory(CredentialsProvider credentialsProvider)
+        public BasicAuthenticationCredentialsFactory(ICredentialsProvider credentialsProvider)
         {
             _credentialsProvider = credentialsProvider;
         }

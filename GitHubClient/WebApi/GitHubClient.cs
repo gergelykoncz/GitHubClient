@@ -15,15 +15,15 @@ namespace GitHubClient.WebApi
     {
         public static string GitHubApiUrl = "https://api.github.com";
 
-        private readonly BranchesProvider _branchesProvider;
+        private readonly IBranchesProvider _branchesProvider;
         private readonly CommitMapper _commitMapper;
-        private readonly CredentialsProvider _credentialsProvider;
+        private readonly ICredentialsProvider _credentialsProvider;
         private readonly string _currentUserName;
         private readonly JsonWebClient _jsonWebClient;
 
-        public GitHubApiClient(BranchesProvider branchesProvider,
+        public GitHubApiClient(IBranchesProvider branchesProvider,
             CommitMapper commitMapper,
-            CredentialsProvider credentialsProvider,
+            ICredentialsProvider credentialsProvider,
             JsonWebClient jsonWebClient)
         {
             _branchesProvider = branchesProvider;

@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO.IsolatedStorage;
+﻿using System.IO.IsolatedStorage;
 
 namespace GitHubClient.Data
 {
-    public class AppSettingsProvider
+    public class AppSettingsProvider : IAppSettingsProvider
     {
         public void StoreSetting(string settingName, object settingValue)
         {

@@ -16,12 +16,12 @@ namespace GitHubClient.Infrastructure
             if (kernel == null)
             {
                 kernel = new StandardKernel();
-                
-                kernel.Bind<AppSettingsProvider>().ToSelf();
-                kernel.Bind<Encrypter>().ToSelf();
-                kernel.Bind<BranchesProvider>().ToSelf();
+
+                kernel.Bind<IAppSettingsProvider>().To<AppSettingsProvider>();
+                kernel.Bind<IEncrypter>().To<Encrypter>();
+                kernel.Bind<IBranchesProvider>().To<BranchesProvider>();
                 kernel.Bind<CommitMapper>().ToSelf();
-                kernel.Bind<CredentialsProvider>().ToSelf();
+                kernel.Bind<ICredentialsProvider>().To<CredentialsProvider>();
                 kernel.Bind<BasicAuthenticationCredentialsFactory>().ToSelf();
                 kernel.Bind<JsonWebClient>().ToSelf();
                 kernel.Bind<IGitHubApiClient>().To<GitHubApiClient>();

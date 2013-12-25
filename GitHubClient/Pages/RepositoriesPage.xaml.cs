@@ -14,13 +14,13 @@ namespace GitHubClient.Pages
     public partial class RepositoriesPage : PhoneApplicationPage
     {
         private RepositoryListViewModel _viewModel;
-        private readonly CredentialsProvider _credentialsProvider;
+        private readonly ICredentialsProvider _credentialsProvider;
 
         public RepositoriesPage()
         {
             InitializeComponent();
             _viewModel = NinjectContainer.Get<RepositoryListViewModel>();
-            _credentialsProvider =NinjectContainer.Get<CredentialsProvider>();
+            _credentialsProvider =NinjectContainer.Get<ICredentialsProvider>();
             DataContext = _viewModel;
             buildLocalizedAppbar();
         }

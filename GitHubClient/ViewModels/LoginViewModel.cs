@@ -8,7 +8,7 @@ namespace GitHubClient.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private readonly CredentialsProvider _credentialsProvider;
+        private readonly ICredentialsProvider _credentialsProvider;
         private readonly IGitHubApiClient _githubApiClient;
 
         private string _userName;
@@ -65,7 +65,7 @@ namespace GitHubClient.ViewModels
             }
         }
 
-        public LoginViewModel(CredentialsProvider credentialsProvider,
+        public LoginViewModel(ICredentialsProvider credentialsProvider,
             IGitHubApiClient githubApiClient)
         {
             _credentialsProvider = credentialsProvider;
