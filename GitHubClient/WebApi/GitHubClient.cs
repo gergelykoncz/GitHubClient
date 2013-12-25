@@ -37,11 +37,7 @@ namespace GitHubClient.WebApi
             var endpointString = new StringBuilder();
             endpointString.AppendFormat("{0}/repos/{1}/{2}/commits", GitHubApiUrl, _currentUserName, repository);
 
-            string currentBranch = _branchesProvider.GetBranchForRepository(repository);
-            if (currentBranch != Branch.Master)
-            {
-                endpointString.AppendFormat("?sha={0}", currentBranch);
-            }
+            appendBranch(endpointString, repository, "sha");
 
             Uri endpoint = new Uri(endpointString.ToString());
             var jsonClient = new JsonWebClient();
@@ -66,12 +62,8 @@ namespace GitHubClient.WebApi
         {
             var endpointString = new StringBuilder();
             endpointString.AppendFormat("{0}/repos/{1}/{2}/contents/{3}", GitHubApiUrl, _currentUserName, repository, path);
-            
-            string currentBranch = _branchesProvider.GetBranchForRepository(repository);
-            if (currentBranch != Branch.Master)
-            {
-                endpointString.AppendFormat("?ref={0}", currentBranch);
-            }
+
+            appendBranch(endpointString, repository, "ref");
 
             Uri endpoint = new Uri(endpointString.ToString());
             var jsonClient = new JsonWebClient();
@@ -83,17 +75,12 @@ namespace GitHubClient.WebApi
             var endpointString = new StringBuilder();
             endpointString.AppendFormat("{0}/repos/{1}/{2}/contents/{3}", GitHubApiUrl, _currentUserName, repository, path);
 
-            string currentBranch = _branchesProvider.GetBranchForRepository(repository);
-            if (currentBranch != Branch.Master)
-            {
-                endpointString.AppendFormat("?ref={0}", currentBranch);
-            }
+            appendBranch(endpointString, repository, "ref");
 
             Uri endpoint = new Uri(endpointString.ToString());
             var jsonClient = new JsonWebClient();
             return await jsonClient.Get<Content>(endpoint);
         }
-
 
         public async Task<IEnumerable<Branch>> GetBranchesForRepository(string repository)
         {
@@ -130,6 +117,15 @@ namespace GitHubClient.WebApi
                     }
                 }
                 return AuthenticationResult.Unknown;
+            }
+        }
+
+        private void appendBranch(StringBuilder target, string repositoryName, string queryParameterName)
+        {
+            string currentBranch = _branchesProvider.GetBranchForRepository(repositoryName);
+            if (currentBranch != Branch.Master)
+            {
+                target.AppendFormat("?{0}={1}", queryParameterName, currentBranch);
             }
         }
     }
