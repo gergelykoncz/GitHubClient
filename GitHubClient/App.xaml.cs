@@ -47,6 +47,16 @@ namespace GitHubClient
             NinjectContainer.Initialize();
         }
 
+        private void Application_Deactivated(object sender, DeactivatedEventArgs e)
+        {
+            NinjectContainer.Dispose();
+        }
+
+        private void Application_Closing(object sender, ClosingEventArgs e)
+        {
+            NinjectContainer.Dispose();
+        }
+
         // Code to execute if a navigation fails
         private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {

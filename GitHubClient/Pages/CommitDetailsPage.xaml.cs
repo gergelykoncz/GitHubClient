@@ -1,4 +1,5 @@
 ﻿using GitHubClient.Data;
+using GitHubClient.Infrastructure;
 using GitHubClient.ViewModels;
 using GitHubClient.WebApi.Entities;
 using Microsoft.Phone.Controls;
@@ -7,7 +8,6 @@ using System.Windows.Navigation;
 
 namespace GitHubClient.Pages
 {
-    using GitHubClient.Infrastructure;
     using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
     public partial class CommitDetailsPage : PhoneApplicationPage

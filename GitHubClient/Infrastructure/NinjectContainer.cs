@@ -16,7 +16,6 @@ namespace GitHubClient.Infrastructure
             if (kernel == null)
             {
                 kernel = new StandardKernel();
-             
                 
                 kernel.Bind<AppSettingsProvider>().ToSelf();
                 kernel.Bind<Encrypter>().ToSelf();
@@ -38,6 +37,11 @@ namespace GitHubClient.Infrastructure
         public static T Get<T>()
         {
             return kernel.Get<T>();
+        }
+
+        public static void Dispose()
+        {
+            kernel.Dispose();
         }
     }
 }

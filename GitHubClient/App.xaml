@@ -16,7 +16,8 @@
     <Application.ApplicationLifetimeObjects>
         <!--Required object that handles lifetime events for the application-->
         <shell:PhoneApplicationService
-            Launching="Application_Launching" Activated="Application_Activated"/>
+            Launching="Application_Launching" Activated="Application_Activated"
+            Closing="Application_Closing" Deactivated="Application_Deactivated"/>
     </Application.ApplicationLifetimeObjects>
 
 </Application>
