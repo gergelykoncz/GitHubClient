@@ -103,6 +103,7 @@
     <Compile Include="Helpers\ContentTypeImageValueConverter.cs" />
     <Compile Include="Helpers\NegateValueConverter.cs" />
     <Compile Include="Helpers\PageTitleValueConverter.cs" />
+    <Compile Include="Infrastructure\NinjectContainer.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Pages\CommitDetailsPage.xaml.cs">
       <DependentUpon>CommitDetailsPage.xaml</DependentUpon>
@@ -224,6 +225,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\sl4-windowsphone71\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.18\lib\sl4-windowsphone71\System.Net.Http.dll</HintPath>

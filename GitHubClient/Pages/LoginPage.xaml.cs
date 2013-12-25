@@ -1,4 +1,5 @@
-﻿using GitHubClient.ViewModels;
+﻿using GitHubClient.Infrastructure;
+using GitHubClient.ViewModels;
 using Microsoft.Phone.Controls;
 using System;
 using System.Windows;
@@ -12,7 +13,7 @@ namespace GitHubClient.Pages
         public LoginPage()
         {
             InitializeComponent();
-            _viewModel = new LoginViewModel();
+            _viewModel = NinjectContainer.Get<LoginViewModel>();
             _viewModel.AuthenticationSuccess += _viewModel_AuthenticationSuccess;
             DataContext = _viewModel;
         }

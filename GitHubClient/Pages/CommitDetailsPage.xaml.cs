@@ -7,15 +7,18 @@ using System.Windows.Navigation;
 
 namespace GitHubClient.Pages
 {
+    using GitHubClient.Infrastructure;
     using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
     public partial class CommitDetailsPage : PhoneApplicationPage
     {
+        private readonly AppSettingsProvider _appSettingsProvider;
         private CommitDetailsViewModel _viewModel;
 
         public CommitDetailsPage()
         {
             InitializeComponent();
+            _appSettingsProvider = NinjectContainer.Get<AppSettingsProvider>();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -30,7 +33,8 @@ namespace GitHubClient.Pages
 
                 if (repoAvailable && commitShaAvailable)
                 {
-                    _viewModel = new CommitDetailsViewModel(repositoryName, commitSha);
+                    _viewModel = NinjectContainer.Get<CommitDetailsViewModel>();
+                    _viewModel.Initialize(repositoryName, commitSha);
                     DataContext = _viewModel;
                 }
             }
@@ -45,7 +49,7 @@ namespace GitHubClient.Pages
                 if (file != null)
                 {
                     //Put the current file into the appsettings
-                    AppSettingsProvider.StoreSetting("LastDiffedFile", file.Patch);
+                    _appSettingsProvider.StoreSetting("LastDiffedFile", file.Patch);
                     var fileUri = new Uri(string.Format("/Pages/ContentFilePage.xaml?filePath={0}", file.FileName), UriKind.Relative);
                     NavigationService.Navigate(fileUri);
                 }

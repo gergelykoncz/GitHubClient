@@ -7,6 +7,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using GitHubClient.Resources;
+using GitHubClient.Infrastructure;
 
 namespace GitHubClient
 {
@@ -34,6 +35,16 @@ namespace GitHubClient
 
             // Language display initialization
             InitializeLanguage();
+        }
+
+        private void Application_Launching(object sender, LaunchingEventArgs e)
+        {
+            NinjectContainer.Initialize();
+        }
+
+        private void Application_Activated(object sender, ActivatedEventArgs e)
+        {
+            NinjectContainer.Initialize();
         }
 
         // Code to execute if a navigation fails

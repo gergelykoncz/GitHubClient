@@ -3,13 +3,9 @@ using GitHubClient.WebApi.Models.Reponse;
 
 namespace GitHubClient.WebApi.Mappers
 {
-    public sealed class CommitMapper
+    public class CommitMapper
     {
-        private CommitMapper()
-        {
-        }
-
-        public static Commit MapToEntity(CommitsResponseModel model)
+        public Commit MapToEntity(CommitsResponseModel model)
         {
             var result = new Commit();
             result.Author = model.Commit.Author;

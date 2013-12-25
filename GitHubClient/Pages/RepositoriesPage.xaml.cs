@@ -1,4 +1,5 @@
 ﻿using GitHubClient.Data;
+using GitHubClient.Infrastructure;
 using GitHubClient.Resources;
 using GitHubClient.ViewModels;
 using GitHubClient.WebApi.Entities;
@@ -13,11 +14,13 @@ namespace GitHubClient.Pages
     public partial class RepositoriesPage : PhoneApplicationPage
     {
         private RepositoryListViewModel _viewModel;
+        private readonly CredentialsProvider _credentialsProvider;
 
         public RepositoriesPage()
         {
             InitializeComponent();
-            _viewModel = new RepositoryListViewModel();
+            _viewModel = NinjectContainer.Get<RepositoryListViewModel>();
+            _credentialsProvider =NinjectContainer.Get<CredentialsProvider>();
             DataContext = _viewModel;
             buildLocalizedAppbar();
         }
@@ -29,7 +32,7 @@ namespace GitHubClient.Pages
 
         protected void LogOutMenuItem_Click(object sender, EventArgs e)
         {
-            CredentialsProvider.EraseCredentials();
+            _credentialsProvider.EraseCredentials();
             Uri loginPageUri = new Uri("/Pages/LoginPage.xaml", UriKind.Relative);
             NavigationService.Navigate(loginPageUri);
         }

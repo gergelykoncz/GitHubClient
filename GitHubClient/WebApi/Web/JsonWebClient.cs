@@ -8,6 +8,13 @@ namespace GitHubClient.WebApi.Web
 {
     public class JsonWebClient
     {
+        private readonly BasicAuthenticationCredentialsFactory _basicAuthCredentialsFactory;
+
+        public JsonWebClient(BasicAuthenticationCredentialsFactory basicAuthCredentialsFactory)
+        {
+            _basicAuthCredentialsFactory = basicAuthCredentialsFactory;
+        }
+
         public async Task<T> Get<T>(Uri endpoint)
         {
             var client = new HttpClient();
@@ -23,10 +30,9 @@ namespace GitHubClient.WebApi.Web
 
         private string getCredentialsForBasicAuthentication()
         {
-            var authenticationFactory = new BasicAuthenticationCredentialsFactory();
             try
             {
-                return authenticationFactory.CreateCredentials();
+                return _basicAuthCredentialsFactory.CreateCredentials();
             }
             catch
             {

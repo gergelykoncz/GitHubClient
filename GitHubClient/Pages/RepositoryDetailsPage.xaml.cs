@@ -6,10 +6,12 @@ using Microsoft.Phone.Shell;
 using System;
 using System.ComponentModel;
 using System.Windows.Navigation;
+using GitHubClient.Infrastructure;
+using System.Windows;
 
 namespace GitHubClient.Pages
 {
-    using System.Windows;
+
     using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
     public partial class RepositoryDetailsPage : PhoneApplicationPage
@@ -31,7 +33,8 @@ namespace GitHubClient.Pages
                 if (NavigationContext.QueryString.TryGetValue("repositoryName", out repositoryName))
                 {
                     _repositoryName = repositoryName;
-                    _viewModel = new RepositoryDetailsViewModel(repositoryName);
+                    _viewModel = NinjectContainer.Get<RepositoryDetailsViewModel>();
+                    _viewModel.Initialize(repositoryName);
                     DataContext = _viewModel;
                 }
             }

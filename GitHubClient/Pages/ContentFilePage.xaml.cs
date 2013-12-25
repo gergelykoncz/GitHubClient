@@ -1,4 +1,5 @@
 ﻿using GitHubClient.Data;
+using GitHubClient.Infrastructure;
 using GitHubClient.Resources;
 using GitHubClient.ViewModels;
 using Microsoft.Phone.Controls;
@@ -19,12 +20,14 @@ namespace GitHubClient.Pages
         private double preferredFontSize;
 
         private ContentFileViewModel _viewModel;
+        private readonly AppSettingsProvider _appSettingsProvider;
 
         public ContentFilePage()
         {
             InitializeComponent();
+            _appSettingsProvider = new AppSettingsProvider();
             buildLocalizedAppbar();
-            preferredFontSize = AppSettingsProvider.RetrieveSetting<double>(FontSizeSettingName, DefaultFontSize);
+            preferredFontSize = _appSettingsProvider.RetrieveSetting<double>(FontSizeSettingName, DefaultFontSize);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -38,17 +41,19 @@ namespace GitHubClient.Pages
             //Showing full file from repository
             if (hasRepository && hasFilePath)
             {
-                _viewModel = new ContentFileViewModel(repositoryName, filePath);
+                _viewModel = NinjectContainer.Get<ContentFileViewModel>();
+                _viewModel.Initialize(repositoryName, filePath);
                 DataContext = _viewModel;
                 _viewModel.FileLoadingFinished += ViewModel_FileLoadingFinished;
             }
             //Showing diff from commit
             else if (hasFilePath)
             {
-                string diffedFile = AppSettingsProvider.RetrieveSetting<string>("LastDiffedFile", null);
+                string diffedFile = _appSettingsProvider.RetrieveSetting<string>("LastDiffedFile", null);
                 if (string.IsNullOrWhiteSpace(diffedFile) == false)
                 {
-                    _viewModel = new ContentFileViewModel(filePath);
+                    _viewModel = NinjectContainer.Get<ContentFileViewModel>();
+                    _viewModel.Initialize(filePath);
                     _viewModel.FileLoadingFinished += ViewModel_FileLoadingFinished;
                     DataContext = _viewModel;
                     _viewModel.LoadDiffFile(diffedFile);
@@ -96,7 +101,7 @@ namespace GitHubClient.Pages
                     textBlock.FontSize += delta;
                     if (!newSizeStored)
                     {
-                        AppSettingsProvider.StoreSetting(FontSizeSettingName, textBlock.FontSize);
+                        _appSettingsProvider.StoreSetting(FontSizeSettingName, textBlock.FontSize);
                         newSizeStored = true;
                     }
                 }

@@ -16,19 +16,27 @@ namespace GitHubClient.WebApi
         public static string GitHubApiUrl = "https://api.github.com";
 
         private readonly BranchesProvider _branchesProvider;
+        private readonly CommitMapper _commitMapper;
+        private readonly CredentialsProvider _credentialsProvider;
         private readonly string _currentUserName;
+        private readonly JsonWebClient _jsonWebClient;
 
-        public GitHubApiClient()
+        public GitHubApiClient(BranchesProvider branchesProvider,
+            CommitMapper commitMapper,
+            CredentialsProvider credentialsProvider,
+            JsonWebClient jsonWebClient)
         {
-            _branchesProvider = new BranchesProvider();
-            _currentUserName = CredentialsProvider.GetUserName();
+            _branchesProvider = branchesProvider;
+            _credentialsProvider = credentialsProvider;
+            _commitMapper = commitMapper;
+            _jsonWebClient = jsonWebClient;
+            _currentUserName = _credentialsProvider.GetUserName();
         }
 
         public async Task<IEnumerable<Repository>> GetRepositories()
         {
             Uri endpoint = new Uri(string.Format("{0}/users/{1}/repos", GitHubApiUrl, _currentUserName));
-            var jsonClient = new JsonWebClient();
-            return await jsonClient.Get<IEnumerable<Repository>>(endpoint);
+            return await _jsonWebClient.Get<IEnumerable<Repository>>(endpoint);
         }
 
         public async Task<IEnumerable<Commit>> GetCommitsForRepository(string repository)
@@ -40,11 +48,10 @@ namespace GitHubClient.WebApi
             appendBranch(endpointString, repository, "sha");
 
             Uri endpoint = new Uri(endpointString.ToString());
-            var jsonClient = new JsonWebClient();
-            var commits = await jsonClient.Get<IEnumerable<CommitsResponseModel>>(endpoint);
+            var commits = await _jsonWebClient.Get<IEnumerable<CommitsResponseModel>>(endpoint);
             foreach (var commitResult in commits)
             {
-                result.Add(CommitMapper.MapToEntity(commitResult));
+                result.Add(_commitMapper.MapToEntity(commitResult));
             }
             return result;
         }
@@ -52,9 +59,8 @@ namespace GitHubClient.WebApi
         public async Task<CommitsResponseModel> GetFilesForCommit(string repository, string commitSha)
         {
             Uri endpoint = new Uri(string.Format("{0}/repos/{1}/{2}/commits/{3}", GitHubApiUrl, _currentUserName, repository, commitSha));
-            var jsonClient = new JsonWebClient();
-            var commitResult = await jsonClient.Get<CommitsResponseModel>(endpoint);
-            commitResult.Commit = CommitMapper.MapToEntity(commitResult);
+            var commitResult = await _jsonWebClient.Get<CommitsResponseModel>(endpoint);
+            commitResult.Commit = _commitMapper.MapToEntity(commitResult);
             return commitResult;
         }
 
@@ -66,8 +72,7 @@ namespace GitHubClient.WebApi
             appendBranch(endpointString, repository, "ref");
 
             Uri endpoint = new Uri(endpointString.ToString());
-            var jsonClient = new JsonWebClient();
-            return await jsonClient.Get<IEnumerable<Content>>(endpoint);
+            return await _jsonWebClient.Get<IEnumerable<Content>>(endpoint);
         }
 
         public async Task<Content> GetFileContent(string repository, string path)
@@ -78,15 +83,13 @@ namespace GitHubClient.WebApi
             appendBranch(endpointString, repository, "ref");
 
             Uri endpoint = new Uri(endpointString.ToString());
-            var jsonClient = new JsonWebClient();
-            return await jsonClient.Get<Content>(endpoint);
+            return await _jsonWebClient.Get<Content>(endpoint);
         }
 
         public async Task<IEnumerable<Branch>> GetBranchesForRepository(string repository)
         {
             Uri endpoint = new Uri(string.Format("{0}/repos/{1}/{2}/branches", GitHubApiUrl, _currentUserName, repository));
-            var jsonClient = new JsonWebClient();
-            return await jsonClient.Get<IEnumerable<Branch>>(endpoint);
+            return await _jsonWebClient.Get<IEnumerable<Branch>>(endpoint);
         }
 
         public async Task<AuthenticationResult> Authenticate(string userName, string password)

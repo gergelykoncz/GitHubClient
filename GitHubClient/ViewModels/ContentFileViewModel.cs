@@ -10,6 +10,8 @@ namespace GitHubClient.ViewModels
 {
     public class ContentFileViewModel : ViewModelBase
     {
+        private readonly IGitHubApiClient _githubApiClient;
+
         public Collection<string> FileInBatches { get; private set; }
 
         private string _fileName;
@@ -30,15 +32,19 @@ namespace GitHubClient.ViewModels
             }
         }
 
-        public ContentFileViewModel(string filePath)
+        public ContentFileViewModel(IGitHubApiClient githubApiClient)
         {
+            _githubApiClient = githubApiClient;
             FileInBatches = new Collection<string>();
+        }
+
+        public void Initialize(string filePath)
+        {
             FileName = filePath;
         }
 
-        public ContentFileViewModel(string repositoryName, string path)
+        public void Initialize(string repositoryName, string path)
         {
-            FileInBatches = new Collection<string>();
             FileName = path;
             fetchFile(repositoryName, path);
         }
@@ -53,8 +59,7 @@ namespace GitHubClient.ViewModels
             try
             {
                 IsBusy = true;
-                var client = new GitHubApiClient();
-                var file = await client.GetFileContent(repositoryName, path);
+                var file = await _githubApiClient.GetFileContent(repositoryName, path);
                 if (file != null)
                 {
                     string base64EncodedFile = file.FileContent;

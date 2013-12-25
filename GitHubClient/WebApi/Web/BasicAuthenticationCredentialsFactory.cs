@@ -6,14 +6,21 @@ namespace GitHubClient.WebApi.Web
 {
     public class BasicAuthenticationCredentialsFactory
     {
+        private readonly CredentialsProvider _credentialsProvider;
+
+        public BasicAuthenticationCredentialsFactory(CredentialsProvider credentialsProvider)
+        {
+            _credentialsProvider = credentialsProvider;
+        }
+
         /// <summary>
         /// Retrieves and encodes credentials using the stored values in isolated storage.
         /// </summary>
         /// <returns></returns>
         public string CreateCredentials()
         {
-            string userName = CredentialsProvider.GetUserName();
-            string password = CredentialsProvider.GetPassword();
+            string userName = _credentialsProvider.GetUserName();
+            string password = _credentialsProvider.GetPassword();
             return CreateCredentials(userName, password);
         }
 

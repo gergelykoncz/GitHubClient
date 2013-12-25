@@ -10,6 +10,9 @@ namespace GitHubClient.ViewModels
 {
     public class RepositoryListViewModel : ViewModelBase
     {
+        private readonly CredentialsProvider _credentialsProvider;
+        private readonly IGitHubApiClient _githubApiClient;
+
         private ObservableCollection<Repository> _allRepositories;
         public ObservableCollection<Repository> AllRepositories
         {
@@ -94,14 +97,17 @@ namespace GitHubClient.ViewModels
             }
         }
 
-        public RepositoryListViewModel()
+        public RepositoryListViewModel(CredentialsProvider credentialsProvider,
+            IGitHubApiClient githubApiClient)
         {
+            _credentialsProvider = credentialsProvider;
+            _githubApiClient = githubApiClient;
             Refresh();
         }
 
         public void Refresh()
         {
-            UserName = CredentialsProvider.GetUserName();
+            UserName = _credentialsProvider.GetUserName();
             fetchRepositories();
         }
 
@@ -110,8 +116,7 @@ namespace GitHubClient.ViewModels
             try
             {
                 IsBusy = true;
-                var gitHubClient = new GitHubApiClient();
-                var repositoriesForUser = await gitHubClient.GetRepositories();
+                var repositoriesForUser = await _githubApiClient.GetRepositories();
                 AllRepositories = new ObservableCollection<Repository>(repositoriesForUser);
                 PublicRepositories = new ObservableCollection<Repository>(repositoriesForUser.Where(x => !x.IsPrivate));
                 ForkedRepositories = new ObservableCollection<Repository>(repositoriesForUser.Where(x => x.IsForked));

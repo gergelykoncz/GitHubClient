@@ -3,9 +3,9 @@ using System.IO.IsolatedStorage;
 
 namespace GitHubClient.Data
 {
-    public static class AppSettingsProvider
+    public class AppSettingsProvider
     {
-        public static void StoreSetting(string settingName, object settingValue)
+        public void StoreSetting(string settingName, object settingValue)
         {
             var settings = IsolatedStorageSettings.ApplicationSettings;
             if (settings.Contains(settingName))
@@ -16,7 +16,7 @@ namespace GitHubClient.Data
             settings.Save();
         }
 
-        public static T RetrieveSetting<T>(string settingName, T defaultValue)
+        public T RetrieveSetting<T>(string settingName, T defaultValue)
         {
             var settings = IsolatedStorageSettings.ApplicationSettings;
             if (settings.Contains(settingName))

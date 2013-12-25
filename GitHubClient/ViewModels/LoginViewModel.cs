@@ -8,6 +8,9 @@ namespace GitHubClient.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
+        private readonly CredentialsProvider _credentialsProvider;
+        private readonly IGitHubApiClient _githubApiClient;
+
         private string _userName;
         public string UserName
         {
@@ -62,10 +65,15 @@ namespace GitHubClient.ViewModels
             }
         }
 
-        public LoginViewModel()
+        public LoginViewModel(CredentialsProvider credentialsProvider,
+            IGitHubApiClient githubApiClient)
         {
-            UserName = CredentialsProvider.GetUserName();
-            Password = CredentialsProvider.GetPassword();
+            _credentialsProvider = credentialsProvider;
+            _githubApiClient = githubApiClient;
+
+            UserName = _credentialsProvider.GetUserName();
+            Password = _credentialsProvider.GetPassword();
+            
             if ((!string.IsNullOrWhiteSpace(UserName)) && (!string.IsNullOrWhiteSpace(Password)))
             {
                 Authenticate();
@@ -87,8 +95,7 @@ namespace GitHubClient.ViewModels
                 return;
             }
 
-            var client = new GitHubApiClient();
-            AuthenticationResult result = await client.Authenticate(UserName, Password);
+            AuthenticationResult result = await _githubApiClient.Authenticate(UserName, Password);
             switch (result)
             {
                 case AuthenticationResult.BadCredentials:
@@ -109,7 +116,7 @@ namespace GitHubClient.ViewModels
         private void finishAutentication()
         {
             IsBusy = false;
-            CredentialsProvider.StoreCredentials(UserName, Password);
+            _credentialsProvider.StoreCredentials(UserName, Password);
 
             if (AuthenticationSuccess != null)
             {

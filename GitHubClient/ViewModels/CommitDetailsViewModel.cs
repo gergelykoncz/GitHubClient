@@ -9,6 +9,8 @@ namespace GitHubClient.ViewModels
 {
     public class CommitDetailsViewModel : ViewModelBase
     {
+        private readonly IGitHubApiClient _githubApiClient;
+
         private ObservableCollection<CommitFile> _files;
         public ObservableCollection<CommitFile> Files
         {
@@ -63,7 +65,12 @@ namespace GitHubClient.ViewModels
             }
         }
 
-        public CommitDetailsViewModel(string repository, string sha)
+        public CommitDetailsViewModel(IGitHubApiClient githubApiClient)
+        {
+            _githubApiClient = githubApiClient;
+        }
+
+        public void Initialize(string repository, string sha)
         {
             SHA = sha;
             fetchCommit(repository, sha);
@@ -74,8 +81,7 @@ namespace GitHubClient.ViewModels
             try
             {
                 IsBusy = true;
-                var client = new GitHubApiClient();
-                CommitsResponseModel commit = await client.GetFilesForCommit(repository, sha);
+                CommitsResponseModel commit = await _githubApiClient.GetFilesForCommit(repository, sha);
                 Files = new ObservableCollection<CommitFile>(commit.Files);
                 Commit = commit.Commit;
             }

@@ -6,11 +6,13 @@ namespace GitHubClient.Data
     public class BranchesProvider
     {
         private readonly string BranchesKey = "Branches";
+        private readonly AppSettingsProvider _appSettingsProvider;
         private readonly Dictionary<string, string> _cachedResult;
 
-        public BranchesProvider()
+        public BranchesProvider(AppSettingsProvider appSettingsProvider)
         {
-            _cachedResult = AppSettingsProvider.RetrieveSetting<Dictionary<string, string>>(BranchesKey, new Dictionary<string, string>());
+            _appSettingsProvider = appSettingsProvider;
+            _cachedResult = _appSettingsProvider.RetrieveSetting<Dictionary<string, string>>(BranchesKey, new Dictionary<string, string>());
         }
 
         public string GetBranchForRepository(string repositoryName)
@@ -38,7 +40,7 @@ namespace GitHubClient.Data
                 _cachedResult.Add(repositoryName, branchName);
             }
 
-            AppSettingsProvider.StoreSetting(BranchesKey, _cachedResult);
+            _appSettingsProvider.StoreSetting(BranchesKey, _cachedResult);
         }
     }
 }
