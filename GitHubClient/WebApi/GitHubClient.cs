@@ -35,7 +35,7 @@ namespace GitHubClient.WebApi
 
         public async Task<IEnumerable<Repository>> GetRepositories()
         {
-            Uri endpoint = new Uri(string.Format("{0}/users/{1}/repos", GitHubApiUrl, _currentUserName));
+            Uri endpoint = new Uri(string.Format("{0}/user/repos", GitHubApiUrl));
             return await _jsonWebClient.Get<IEnumerable<Repository>>(endpoint);
         }
 
