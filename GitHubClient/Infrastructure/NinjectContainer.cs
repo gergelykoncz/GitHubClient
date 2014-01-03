@@ -31,6 +31,7 @@ namespace GitHubClient.Infrastructure
                 kernel.Bind<RepositoryDetailsViewModel>().ToSelf();
                 kernel.Bind<CommitDetailsViewModel>().ToSelf();
                 kernel.Bind<ContentFileViewModel>().ToSelf();
+                kernel.Bind<UserDetailsViewModel>().ToSelf();
             }
         }
 

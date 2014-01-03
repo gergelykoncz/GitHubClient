@@ -233,4 +233,10 @@
   <data name="RepoDetailsBranchSwitchMessage" xml:space="preserve">
     <value>The selected branch on "{0}" is now "{1}".</value>
   </data>
+  <data name="RepoDetailsContributors" xml:space="preserve">
+    <value>contributors</value>
+  </data>
+  <data name="UserDetailsErrorMessage" xml:space="preserve">
+    <value>Could not fetch user data. Please check your network connection.</value>
+  </data>
 </root>

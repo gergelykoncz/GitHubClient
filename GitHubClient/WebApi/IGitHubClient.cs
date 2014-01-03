@@ -15,5 +15,7 @@ namespace GitHubClient.WebApi
         Task<Content> GetFileContent(string repository, string path);
         Task<IEnumerable<Branch>> GetBranchesForRepository(string repository);
         Task<AuthenticationResult> Authenticate(string userName, string password);
+        Task<IEnumerable<Owner>> GetContributors(string repository);
+        Task<Owner> GetUser(string userName);
     }
 }

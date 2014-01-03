@@ -124,6 +124,9 @@
     <Compile Include="Pages\RepositoryDetailsPage.xaml.cs">
       <DependentUpon>RepositoryDetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\UserDetailsPage.xaml.cs">
+      <DependentUpon>UserDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -135,6 +138,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RepositoryDetailsViewModel.cs" />
     <Compile Include="ViewModels\RepositoryListViewModel.cs" />
+    <Compile Include="ViewModels\UserDetailsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="WebApi\Entities\Author.cs" />
     <Compile Include="WebApi\Entities\Branch.cs" />
@@ -177,6 +181,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\UserDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -189,6 +197,9 @@
     <Content Include="Assets\add.png" />
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\biggerfont.png" />
+    <Content Include="Assets\blog.png" />
+    <Content Include="Assets\company.png" />
+    <Content Include="Assets\email.png" />
     <Content Include="Assets\file.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -196,6 +207,9 @@
     <Content Include="Assets\delete.png" />
     <Content Include="Assets\edit.png" />
     <Content Include="Assets\folder.png" />
+    <Content Include="Assets\joined.png" />
+    <Content Include="Assets\location.png" />
+    <Content Include="Assets\name.png" />
     <Content Include="Assets\refresh.png" />
     <Content Include="Assets\smallerfont.png" />
     <Content Include="Assets\Tiles\IconicTileMedium.png" />

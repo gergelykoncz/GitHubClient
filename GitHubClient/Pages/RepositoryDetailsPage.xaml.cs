@@ -95,6 +95,16 @@ namespace GitHubClient.Pages
             }
         }
 
+        private void Users_Tap(object sender, GestureEventArgs e)
+        {
+            Owner owner = getSelection<Owner>(sender);
+            if (owner != null)
+            {
+                var userUri = new Uri(string.Format("/Pages/UserDetailsPage.xaml?userName={0}", owner.Login), UriKind.Relative);
+                NavigationService.Navigate(userUri);
+            }
+        }
+
         private void Refresh_Click(object sender, EventArgs e)
         {
             _viewModel.Refresh();

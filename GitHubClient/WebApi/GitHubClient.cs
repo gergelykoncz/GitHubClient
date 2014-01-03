@@ -123,6 +123,18 @@ namespace GitHubClient.WebApi
             }
         }
 
+        public async Task<IEnumerable<Owner>> GetContributors(string repository)
+        {
+            Uri endpoint = new Uri(string.Format("{0}/repos/{1}/{2}/contributors", GitHubApiUrl, _currentUserName, repository));
+            return await _jsonWebClient.Get<IEnumerable<Owner>>(endpoint);
+        }
+
+        public async Task<Owner> GetUser(string userName)
+        {
+            Uri endpoint = new Uri(string.Format("{0}/users/{1}", GitHubApiUrl, userName));
+            return await _jsonWebClient.Get<Owner>(endpoint);
+        }
+
         private void appendBranch(StringBuilder target, string repositoryName, string queryParameterName)
         {
             string currentBranch = _branchesProvider.GetBranchForRepository(repositoryName);

@@ -304,6 +304,15 @@ namespace GitHubClient.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to contributors.
+        /// </summary>
+        public static string RepoDetailsContributors {
+            get {
+                return ResourceManager.GetString("RepoDetailsContributors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while opening the directory &quot;{0}&quot;. Please check your Internet connection..
         /// </summary>
         public static string RepoDetailsDirectoryErrorMessage {
@@ -399,6 +408,15 @@ namespace GitHubClient.Resources {
         public static string ResourceLanguage {
             get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not fetch user data. Please check your network connection..
+        /// </summary>
+        public static string UserDetailsErrorMessage {
+            get {
+                return ResourceManager.GetString("UserDetailsErrorMessage", resourceCulture);
             }
         }
     }

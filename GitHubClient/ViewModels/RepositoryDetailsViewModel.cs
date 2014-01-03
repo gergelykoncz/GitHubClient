@@ -105,6 +105,25 @@ namespace GitHubClient.ViewModels
             }
         }
 
+        private ObservableCollection<Owner> _contributors;
+        public ObservableCollection<Owner> Contributors
+        {
+            get
+            {
+                return _contributors;
+            }
+            set
+            {
+                if (_contributors != value)
+                {
+                    NotifyPropertyChanging("Contributors");
+                    _contributors = value;
+                    NotifyPropertyChanged("Contributors");
+                }
+            }
+        }
+
+
         public RepositoryDetailsViewModel(IBranchesProvider branchesProvider,
             IGitHubApiClient githubApiClient)
         {
@@ -184,6 +203,9 @@ namespace GitHubClient.ViewModels
 
                 var loadedBranches = await _githubApiClient.GetBranchesForRepository(Name);
                 Branches = new ObservableCollection<Branch>(loadedBranches);
+
+                var loadedContributors = await _githubApiClient.GetContributors(Name);
+                Contributors = new ObservableCollection<Owner>(loadedContributors);
             }
             catch
             {
