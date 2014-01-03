@@ -43,6 +43,7 @@ namespace GitHubClient.Infrastructure
         public static void Dispose()
         {
             kernel.Dispose();
+            kernel = null;
         }
     }
 }
